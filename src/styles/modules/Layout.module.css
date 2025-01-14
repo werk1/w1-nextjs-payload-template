@@ -1,0 +1,10 @@
+.title {
+  font-family: var(--font-your-font);
+  font-weight: 700;
+}
+
+/* Or use the className directly */
+.text {
+  font-family: var(--font-your-font);
+  font-weight: 400;
+}
