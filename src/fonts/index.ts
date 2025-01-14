@@ -1,22 +1,7 @@
-import localFont from 'next/font/local'
+import { Inter } from 'next/font/google'
 
-export const yourFont = localFont({
-  src: [
-    {
-      path: './local/YourFont-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: './local/YourFont-Medium.woff2',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: './local/YourFont-Bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-your-font', // CSS variable name
+// If loading a variable font, you don't need to specify the font weight
+export const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
 })

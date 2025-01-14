@@ -1,10 +1,30 @@
 .title {
-  font-family: var(--font-your-font);
+  font-family: var(--font-inter);
   font-weight: 700;
 }
 
-/* Or use the className directly */
 .text {
-  font-family: var(--font-your-font);
+  font-family: var(--font-inter);
+  font-weight: 400;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.section {
+  margin: 2rem 0;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.listItem {
+  margin: 0.5rem 0;
+  font-family: var(--font-inter);
   font-weight: 400;
 }
