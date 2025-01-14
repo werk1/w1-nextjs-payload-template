@@ -1,11 +1,9 @@
 .title {
-  font-family: var(--font-gt-america-standard-bold);
-  font-weight: normal;
+  font-family: var(--fontGtAmericaStandardBold);
 }
 
 .text {
-  font-family: var(--font-gt-america-standard-regular);
-  font-weight: normal;
+  font-family: var(--fontGtAmericaStandardRegular);
 }
 
 .container {
@@ -25,5 +23,5 @@
 
 .listItem {
   margin: 0.5rem 0;
-  font-family: var(--font-gt-america-standard-light);
+  font-family: var(--fontGtAmericaStandardThin);
 }
