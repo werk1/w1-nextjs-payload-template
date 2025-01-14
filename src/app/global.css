@@ -1,0 +1,27 @@
+:root {
+
+    /* colors */
+    --col_primary-color: #333;
+    --col_secondary-color: #666;
+    --col_accent-color: #f90;
+    --col_text-color: #333;
+    --col_background-light: #f2f2f2;
+    --col_background-dark: #202020;
+
+    --col_menu_icons: #e7c03e;
+    --col_menu_icons_hover: #ccbc87;
+
+    /* Typography */
+    --typo_body: 'Roboto', sans-serif;
+    --typo_body-bold: 'Roboto', bold;
+    --typo_body-italic: 'Roboto', italic;
+    --typo_heading: 'Montserrat', sans-serif;
+
+    /* paragraphs */
+    --par-copy: var(--body), 16px, 1.5;
+
+    /* measures */
+    --measure-header-height: 180px;
+    --measure-header-width_mobile_l: 180px;
+
+}

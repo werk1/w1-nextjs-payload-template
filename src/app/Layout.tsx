@@ -1,6 +1,9 @@
-import { GTAmericaStandardRegular, GTAmericaStandardBold, GTAmericaStandardThin } from '@/fonts'
+import './global.css' // Global styles
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+import { GTAmericaStandardRegular, GTAmericaStandardBold, GTAmericaStandardThin } from '@/fonts'
+import { Providers } from '@/components/providers/Providers'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
@@ -10,7 +13,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       ${GTAmericaStandardThin.variable}
     `}
     >
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }

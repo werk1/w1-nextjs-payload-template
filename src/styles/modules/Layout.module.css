@@ -1,5 +1,14 @@
+.mainTitle {
+  font-family: var(--fontGtAmericaStandardBold);
+  font-size: 8rem;
+  letter-spacing: -0.05em;
+  line-height: 0.8;
+}
+
 .title {
   font-family: var(--fontGtAmericaStandardBold);
+  font-size: 4rem;
+  line-height: 0.8;
 }
 
 .text {

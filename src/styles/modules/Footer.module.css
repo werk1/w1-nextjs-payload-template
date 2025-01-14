@@ -1,0 +1,38 @@
+
+.layoutDesktop {
+    width: 100%;
+    background-color: var(--col_background-dark);
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    padding-bottom: 40px;
+    flex-grow: 1;
+}
+
+.layoutPobilePortrait {
+    background-color: var(--col_background-dark);
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    padding-bottom: 40px;
+    flex-grow: 1;
+}
+
+.layoutMobileLandscape {
+    background-color: var(--col_background-dark);
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    padding-bottom: 40px;
+
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5px;
+}
+
+.icons>span {
+    padding-left: 10px;
+}
