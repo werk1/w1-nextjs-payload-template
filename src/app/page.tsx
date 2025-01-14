@@ -6,19 +6,19 @@ export default function HomePage() {
       <h1 className={styles.title}>Welcome to Your Application</h1>
 
       <section>
-        <h2>About</h2>
+        <h2 className={styles.title}>About</h2>
         <p className={styles.text}>
           This is your landing page. Customize this content to match your needs.
         </p>
       </section>
 
       <section>
-        <h2>Features</h2>
-        <ul>
-          <li>Payload CMS Integration</li>
-          <li>Next.js App Router</li>
-          <li>TypeScript Support</li>
-          <li>Custom Font Integration</li>
+        <h2 className={styles.title}>Features</h2>
+        <ul className={styles.list}>
+          <li className={styles.listItem}>Payload CMS Integration</li>
+          <li className={styles.listItem}>Next.js App Router</li>
+          <li className={styles.listItem}>TypeScript Support</li>
+          <li className={styles.listItem}>Custom Font Integration</li>
         </ul>
       </section>
     </div>
