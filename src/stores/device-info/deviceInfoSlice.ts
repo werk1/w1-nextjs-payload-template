@@ -1,4 +1,6 @@
 import { StateCreator } from 'zustand'
+import { getDeviceAgent } from '../../utils/deviceAgent'
+
 
 export interface DeviceInfoSlice {
   device: {
@@ -29,15 +31,14 @@ export const createDeviceInfoSlice: StateCreator<DeviceInfoSlice> = (set) => ({
     width: 0,
     height: 0,
   },
+  
   updateDeviceInfo: () => {
     if (typeof window === 'undefined') return
 
+    const { isMobile, isDesktop, hasTouchSupport } = getDeviceAgent()
     const width = window.innerWidth
     const height = window.innerHeight
     const isLandscape = width > height
-    const isMobile = width <= 768 // or your preferred mobile breakpoint
-    const isDesktop = !isMobile
-    const hasTouchSupport = 'ontouchstart' in window
 
     set({
       device: {

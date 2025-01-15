@@ -1,18 +1,21 @@
 .mainTitle {
   font-family: var(--fontGtAmericaStandardBold);
-  font-size: 3rem;
+  font-size: 5rem;
   letter-spacing: -0.05em;
   line-height: 0.8;
 }
 
 .title {
   font-family: var(--fontGtAmericaStandardBold);
-  font-size: 4rem;
+  font-size: 3.8rem;
+  letter-spacing: -0.05em;
   line-height: 0.8;
 }
 
 .text {
   font-family: var(--fontGtAmericaStandardRegular);
+  font-size: 1.7rem;
+  line-height: 1.2;
 }
 
 .container {
