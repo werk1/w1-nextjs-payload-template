@@ -21,11 +21,12 @@ const Footer = ({ children }: FooterProps) => {
   return (
     <>
       <RemainingSpaceTracker />
-      <footer className={classFooter}>
+      <div className={classFooter}>
         {children}
-      </footer>
+      </div>
     </>
   )
 }
+
 Footer.displayName = 'Footer'
 export default Footer

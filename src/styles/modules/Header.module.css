@@ -1,0 +1,53 @@
+.baseDesktop {
+    position: fixed;
+    height: var(--measure-header-height);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--col_background-dark);
+}
+
+.baseMobilePortrait {
+    position: fixed;
+    height: var(--measure-header-height);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--col_background-dark);
+}
+
+
+.baseLeftMobileLandscape {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    width: var(--measure-header-width_mobile_l);
+    height: 100vh;
+    background-color: var(--col_background-dark);
+}
+
+.baseRightMobileLandscape {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    right: 0;
+    width: var(--measure-header-width_mobile_l);
+    height: 100vh;
+    background-color: var(--col_background-dark);
+}
+
+.toggleSideIcon {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    padding: 0;
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    color: rgb(187, 164, 102);
+}

@@ -4,17 +4,39 @@ import Footer from '@/components/footer/Footer'
 import FooterIcons from '@/components/footer/FooterIcons'
 import styles from '@/styles/modules/Layout.module.css'
 import FillBottomSpace from '@/components/footer/FillBottomSpace'
+import Header from '@/components/header/Header'
 import { useBoundStore } from '@/stores/boundStore'
+import { useState } from 'react'
+import { ScrollTracker } from '@/stores/scroll-observer'
+
 
 export default function HomePage() {
   const isDesktop = useBoundStore((state) => state.device.isDesktop)
+  const scrollYClamped = useBoundStore((state) => state.scroll.scrollYClamped)
+  const contentIsScrollingDown = useBoundStore((state) => state.scrollDirection.isScrollingDown)
+  const HEADER_HEIGHT = 100
+  const isHeaderLeft = false
+  const setIsHeaderLeft = () => {}
+  const [contentScrollMode] = useState<boolean>(true);
+
 
   return (
     <div>
-      <div className={styles.container}>
+      <Header
+        scrollY={scrollYClamped}
+        contentIsScrollingDown={contentIsScrollingDown}
+        hideHeaderOnContentScroll={contentScrollMode}
+        headerHeight={HEADER_HEIGHT}
+        isHeaderLeft={isHeaderLeft}
+        setIsHeaderLeft={setIsHeaderLeft}
+      ></Header>      
+        <div className={styles.container}>
         <h1 className={styles.mainTitle}>
           Welcome <br /> to Your <br /> new App
         </h1>
+        <p className={styles.text}>
+          contentIsScrollingDown: {contentIsScrollingDown ? 'true' : 'false'}
+        </p>
 
         <section>
           <h2 className={styles.title}>Some things <br/>about</h2>

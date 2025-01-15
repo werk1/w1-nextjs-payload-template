@@ -15,10 +15,15 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.0.1",
+    "@mui/material": "^6.0.1",
     "@payloadcms/db-sqlite": "latest",
     "@payloadcms/next": "latest",
     "@payloadcms/payload-cloud": "latest",
     "@payloadcms/richtext-lexical": "latest",
+    "@react-spring/web": "^9.7.5",
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
     "next": "15.1.0",
@@ -26,11 +31,7 @@
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "sharp": "0.32.6",
-    "zustand": "^5.0.3",
-    "@mui/icons-material": "^6.0.1",
-    "@mui/material": "^6.0.1",
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0"
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

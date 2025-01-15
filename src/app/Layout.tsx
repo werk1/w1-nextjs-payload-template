@@ -1,3 +1,4 @@
+import { ScrollTracker } from '@/stores/scroll-observer'
 import './global.css' // Global styles
 
 import { GTAmericaStandardRegular, GTAmericaStandardBold, GTAmericaStandardThin } from '@/fonts'
@@ -12,8 +13,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       ${GTAmericaStandardThin.variable}
     `}
     >
+    <ScrollTracker/>
       <body>
-        {children}
+          {children}
       </body>
     </html>
   )
