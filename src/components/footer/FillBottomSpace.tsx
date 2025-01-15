@@ -1,18 +1,16 @@
-import React from 'react'
+'use client'
 
-interface FillBottomSpaceProps {
-  height: number
-  children?: React.ReactNode
-}
+import { useBoundStore } from '@/stores/boundStore'
 
-const FillBottomSpace = (props: FillBottomSpaceProps) => {
+const FillBottomSpace = () => {
+  const remainingSpace = useBoundStore((state) => state.remainingSpace.value)
+
   const styles = {
     container: {
-      height: props.height,
-      //     backgroundColor: "var(--col_background-dark)",
-      // } as React.CSSProperties,
-      backgroundColor: 'rgba(200,1.0,0,0.5)',
-    },
+      height: remainingSpace,
+      backgroundColor: "var(--col_background-dark)",
+      } as React.CSSProperties
+      // backgroundColor: 'rgba(200,1.0,0,0.5)' 
   }
   return <div style={styles.container}></div>
 }

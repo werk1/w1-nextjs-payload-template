@@ -1,7 +1,6 @@
 import './global.css' // Global styles
 
 import { GTAmericaStandardRegular, GTAmericaStandardBold, GTAmericaStandardThin } from '@/fonts'
-import { Providers } from '@/components/providers/Providers'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -14,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     `}
     >
       <body>
-        <Providers>{children}</Providers>
+        {children}
       </body>
     </html>
   )

@@ -8,7 +8,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 const FooterIcons = () => {
   return (
     <div>
-      <p>&copy; 2023 My Website. All rights reserved.</p>
+      <p className={styles.copyright}>&copy; 2023 My Website. All rights reserved.</p>
       <div className={styles.icons}>
         <span>
           <GoogleIcon />

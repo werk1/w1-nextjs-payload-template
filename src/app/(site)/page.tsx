@@ -3,15 +3,11 @@
 import Footer from '@/components/footer/Footer'
 import FooterIcons from '@/components/footer/FooterIcons'
 import styles from '@/styles/modules/Layout.module.css'
-import { DeviceContext } from '@/context/DeviceContext'
-import { useContext, useRef } from 'react'
 import FillBottomSpace from '@/components/footer/FillBottomSpace'
+import { useBoundStore } from '@/stores/boundStore'
 
 export default function HomePage() {
-  const deviceInfo = useContext(DeviceContext)
-  const footerRef = useRef<{ getRemainingSpace: () => number }>(null) // Create a ref
-
-  const { isDesktop } = deviceInfo ?? {}
+  const isDesktop = useBoundStore((state) => state.device.isDesktop)
 
   return (
     <div>
@@ -37,13 +33,11 @@ export default function HomePage() {
           </ul>
         </section>
       </div>
-      <Footer ref={footerRef}>
+      <Footer>
         <FooterIcons />
       </Footer>
       {isDesktop && (
-        <FillBottomSpace
-          height={footerRef.current?.getRemainingSpace ? footerRef.current.getRemainingSpace() : 0}
-        ></FillBottomSpace>
+        <FillBottomSpace />
       )}
     </div>
   )

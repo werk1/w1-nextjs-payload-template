@@ -1,4 +1,3 @@
-
 .layoutDesktop {
     width: 100%;
     background-color: var(--col_background-dark);
@@ -35,4 +34,10 @@
 
 .icons>span {
     padding-left: 10px;
+}
+
+.copyright {
+    font-family: var(--fontGtAmericaStandardThin);
+    font-size: 10px;
+    padding-top: 10px;
 }
