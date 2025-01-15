@@ -38,13 +38,22 @@ export const GTAmericaStandardThin = localFont({
   variable: '--fontGtAmericaStandardThin',
 })
 
+export const GTAmericaStandardBlack = localFont({
+  src: [
+    {
+      path: './GTAmerica/GT-America-Standard-Black.woff2',
+      weight: 'normal',
+    },
+  ],
+  variable: '--fontGtAmericaStandardBlack',
+})
+
 // Group all font variables in one place
 export const installedLocalFonts = [
+  GTAmericaStandardBlack.variable,
   GTAmericaStandardRegular.variable,
   GTAmericaStandardBold.variable,
   GTAmericaStandardThin.variable,
 ]
-
 export const installedGoogleFonts = [inter.className]
-
 export const installedFonts = [...installedLocalFonts, ...installedGoogleFonts].join(' ')

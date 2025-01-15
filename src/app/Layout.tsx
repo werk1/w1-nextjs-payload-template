@@ -1,21 +1,19 @@
-import { ScrollTracker } from '@/stores/scroll-observer'
-import './global.css' // Global styles
+import { installedLocalFonts } from '@/styles/fonts'
+import '@/styles/global.css' // Global styles
 
-import { GTAmericaStandardRegular, GTAmericaStandardBold, GTAmericaStandardThin } from '@/fonts'
+import { ScrollTracker } from '@/stores/scroll-observer'
+import { DeviceInfoTracker } from '@/stores/device-info'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`
-      ${GTAmericaStandardRegular.variable} 
-      ${GTAmericaStandardBold.variable}
-      ${GTAmericaStandardThin.variable}
-    `}
+      className={installedLocalFonts.join(' ')}
     >
-    <ScrollTracker/>
       <body>
-          {children}
+        <ScrollTracker />
+        <DeviceInfoTracker />
+        {children}
       </body>
     </html>
   )

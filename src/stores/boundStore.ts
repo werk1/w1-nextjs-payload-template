@@ -1,3 +1,5 @@
+'use client'
+
 import { create } from 'zustand'
 import { ScrollSlice, createScrollSlice } from './scroll-observer'
 import { DeviceInfoSlice, createDeviceInfoSlice } from './device-info'

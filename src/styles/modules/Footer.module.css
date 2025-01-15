@@ -8,7 +8,7 @@
     flex-grow: 1;
 }
 
-.layoutPobilePortrait {
+.layoutMobilePortrait {
     background-color: var(--col_background-dark);
     color: white;
     text-align: center;

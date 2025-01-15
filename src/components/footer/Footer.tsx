@@ -1,7 +1,10 @@
+'use client'
+
 import { RemainingSpaceTracker } from '@/stores/remaining-space'
 import { ReactNode } from 'react'
 import styles from '../../styles/modules/Footer.module.css'
 import { useBoundStore } from '@/stores/boundStore'
+import FillBottomSpace from '@/components/footer/FillBottomSpace'
 
 interface FooterProps {
   children: ReactNode
@@ -9,14 +12,12 @@ interface FooterProps {
 }
 
 const Footer = ({ children }: FooterProps) => {
-  const deviceInfo = useBoundStore((state) => state.device)
-  const { isPhonePortrait, isPhoneLandscape } = deviceInfo ?? {}
-
+  const { isPhonePortrait, isPhoneLandscape, isDesktop } = useBoundStore((state) => state.device) ?? {}
   const classFooter = isPhonePortrait
-   ? styles.layoutMobilePortrait
-   : isPhoneLandscape
-     ? styles.layoutMobileLandscape
-     : styles.layoutDesktop
+    ? styles.layoutMobilePortrait
+    : isPhoneLandscape
+      ? styles.layoutMobileLandscape
+      : styles.layoutDesktop
 
   return (
     <>
@@ -24,6 +25,7 @@ const Footer = ({ children }: FooterProps) => {
       <div className={classFooter}>
         {children}
       </div>
+      {isDesktop && <FillBottomSpace />}
     </>
   )
 }

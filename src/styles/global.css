@@ -12,16 +12,16 @@
     --col_menu_icons_hover: #ccbc87;
 
     /* Typography */
-    --typo_body: 'Roboto', sans-serif;
-    --typo_body-bold: 'Roboto', bold;
-    --typo_body-italic: 'Roboto', italic;
-    --typo_heading: 'Montserrat', sans-serif;
+    --typo_body: var(--fontGtAmericaStandardRegular);
+    --typo_body-bold: var(--fontGtAmericaStandardBold);
+    --typo_body-thin: var(--fontGtAmericaStandardThin);
+    --typo_heading: var(--fontGtAmericaStandardBlack);
 
     /* paragraphs */
-    --par-copy: var(--body), 16px, 1.5;
+    --par-copy: var(--typo_body), 16px, 1.5;
 
     /* measures */
-    --measure-header-height: 180px;
-    --measure-header-width_mobile_l: 180px;
+    --measure-header-height: 320px;
+    --measure-header-width_mobile_l: 240px;
 
 }

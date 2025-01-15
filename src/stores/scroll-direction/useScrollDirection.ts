@@ -26,11 +26,11 @@ export const useScrollDirection = (
     })
 
     // Update direction
-    updateScrollDirection(currentScrollY, velocityUp, velocityDown, velocityMode, reset)
-  }, [scroll.scrollY, velocityUp, velocityDown, velocityMode, reset])
+    updateScrollDirection(currentScrollY, velocityUp, velocityDown, velocityMode, reset, velocity)
+  }, [scroll.scrollYClamped, velocityUp, velocityDown, velocityMode, reset])
 
   return {
     isScrollingDown: scrollDirection.isScrollingDown,
-    velocity: scrollDirection.velocity
+    velocity: scrollDirection.velocity  // Return the velocity
   }
 }

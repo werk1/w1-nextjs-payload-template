@@ -4,16 +4,17 @@ import { calculateScrollVelocity } from './utils/calculateScrollVelocity'
 export interface ScrollDirectionSlice {
   scrollDirection: {
     isScrollingDown: boolean
-    velocity: number
     previousScrollY: number
     previousTimestamp: number
+    velocity: number
   }
   updateScrollDirection: (
     currentScrollY: number,
     velocityUp?: number,
     velocityDown?: number,
     velocityMode?: "time-sensitive" | "none",
-    reset?: number
+    reset?: number,
+    velocity?: number
   ) => void
 }
 
@@ -24,7 +25,7 @@ export const createScrollDirectionSlice: StateCreator<ScrollDirectionSlice> = (s
     previousScrollY: 0,
     previousTimestamp: typeof performance !== 'undefined' ? performance.now() : 0
   },
-  
+
   updateScrollDirection: (
     currentScrollY: number,
     velocityUp = 0,
@@ -33,7 +34,7 @@ export const createScrollDirectionSlice: StateCreator<ScrollDirectionSlice> = (s
     reset = 0
   ) => {
     const { previousScrollY, previousTimestamp } = get().scrollDirection
-    
+
     const velocity = calculateScrollVelocity({
       currentScrollY,
       previousScrollY,

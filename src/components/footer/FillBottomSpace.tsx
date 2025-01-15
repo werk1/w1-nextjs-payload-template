@@ -9,8 +9,7 @@ const FillBottomSpace = () => {
     container: {
       height: remainingSpace,
       backgroundColor: "var(--col_background-dark)",
-      } as React.CSSProperties
-      // backgroundColor: 'rgba(200,1.0,0,0.5)' 
+    } as React.CSSProperties
   }
   return <div style={styles.container}></div>
 }
