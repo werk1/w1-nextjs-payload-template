@@ -8,26 +8,27 @@ import Header from '@/components/header/Header';
 import { useBoundStore } from '@/stores/boundStore';
 import { SectionTwo } from '@/components/page-one/SectionTwo';
 
-enum HeaderPosition {
-	center = 'center',
-	left = 'left',
-	right = 'right',
-}
-‚
+export enum HeaderPosition {
+	Center = 'center',
+	Left = 'left',
+	Right = 'right'
+  }
+
+  
 export default function HomePage() {
-	const headerPosition = HeaderPosition.center; // This allows all three values
+	const headerPosition: HeaderPosition = HeaderPosition.Center;
 	const isHeaderLeft = true;
 	const contentScrollMode = false;
 	const { isPhonePortrait, isPhoneLandscape, isDesktop } = useBoundStore((state) => state.device);
 
 	const classContent = (() => {
-		if (isPhoneLandscape && headerPosition == HeaderPosition.left) return stylesContent.contentMobileLandscapeLeft;
-		if (isPhoneLandscape && headerPosition == HeaderPosition.right) return stylesContent.contentMobileLandscapeRight;
-		if (isPhoneLandscape && headerPosition == HeaderPosition.center) return stylesContent.contentMobileLandscape;
+		if (isPhoneLandscape && headerPosition === HeaderPosition.Left as HeaderPosition) return stylesContent.contentMobileLandscapeLeft;
+		if (isPhoneLandscape && headerPosition === HeaderPosition.Right as HeaderPosition) return stylesContent.contentMobileLandscapeRight;
+		if (isPhoneLandscape && headerPosition === HeaderPosition.Center as HeaderPosition) return stylesContent.contentMobileLandscape;
 		if (isPhonePortrait) return stylesContent.contentMobilePortrait;
 		if (isDesktop && contentScrollMode) return stylesContent.contentDesktopContentScroll;
 		if (isDesktop && !contentScrollMode) return stylesContent.contentDesktopPageScroll;
-		return stylesContent.contentDesktopPageScroll;
+		return stylesContent.contentDesktopPageScroll; // default fallback
 	})();
 
 	return (

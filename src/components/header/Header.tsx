@@ -10,7 +10,11 @@ import { HEADER_HEIGHT } from '@/styles/constants/constants';
 // Create a properly typed animated header component
 const AnimatedHeader = animated('header');
 
-type HeaderPosition = 'center' | 'left' | 'right';
+enum HeaderPosition {
+  Center = 'center',
+  Left = 'left',
+  Right = 'right'
+}
 
 export type HeaderProps = {
 	hideHeaderOnContentScroll: boolean;
@@ -33,13 +37,13 @@ function Header(props: HeaderProps) {
 	// Determine base header class based on device type and orientation
 	let baseHeader = styles.baseDesktop; // default value
 
-	if (isPhoneLandscape && props.headerPosition === 'left') {
+	if (isPhoneLandscape && props.headerPosition === HeaderPosition.Left) {
 		baseHeader = styles.baseMobileLandscape;
-	} else if (isPhoneLandscape && props.headerPosition === 'right') {
+	} else if (isPhoneLandscape && props.headerPosition === HeaderPosition.Right) {
 		baseHeader = styles.baseRightMobileLandscape;
 	} else if (isPhonePortrait) {
 		baseHeader = styles.baseMobilePortrait;
-	} else if (isPhoneLandscape && props.headerPosition === 'center') {
+	} else if (isPhoneLandscape && props.headerPosition === HeaderPosition.Center) {
 		baseHeader = styles.baseMobileLandscape;
 	}
 
