@@ -11,7 +11,7 @@ export function SectionTwo() {
 			Beam <br />me up!
 		</h2>
 	) : (
-		<h2 className={styles.mainTitle}>
+		<h2 className={styles.mainTitle} style={{ color: 'rgba(130, 20, 20, 0.3)' }}>
 			Bring me <br />down!
 		</h2>
 	);
