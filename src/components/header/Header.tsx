@@ -19,13 +19,9 @@ export type HeaderProps = {
  * Header component that adapts to different device types and scroll behavior.
  */
 function Header(props: HeaderProps) {
-	const {
-		isPhonePortrait,
-		isPhoneLandscapeCenter,
-		isPhoneLandscapeLeft,
-		isPhoneLandscapeRight,
-		isDesktop
-	} = useBoundStore((state) => state.device);
+	const { isPhonePortrait, isPhoneLandscapeCenter, isPhoneLandscapeLeft, isPhoneLandscapeRight } = useBoundStore(
+		(state) => state.device
+	);
 	const { isScrollingDown } = useScrollDirection(
 		0.33, // velocityUp
 		0.33, // velocityDown
@@ -45,42 +41,18 @@ function Header(props: HeaderProps) {
 		baseHeader = styles.baseMobilePortrait;
 	}
 
-	// const baseHeader = useResponsiveClass({
-	// 	phonePortrait: styles.baseMobilePortrait,
-	// 	phoneLandscapeLeft: styles.baseLeftMobileLandscape,
-	// 	phoneLandscapeRight: styles.baseRightMobileLandscape,
-	// 	desktop: styles.baseDesktop,
-	// 	isHeaderLeft: props.isHeaderLeft,
-	// 	contentScrollMode: props.hideHeaderOnContentScroll,
-	// 	defaultClass: styles.baseDesktop
-	// });
-
 	// Configure spring animation for header visibility
-	const animated_top_style = useSpring(
-		isPhoneLandscapeCenter
-			? {
-					top: isScrollingDown ? -HEADER_HEIGHT * 1.2 : 0,
-					height: isScrollingDown ? 0 : HEADER_HEIGHT,
-					opacity: !isScrollingDown ? 0.7 : 0,
-					config: {
-						mass: 4,
-						tension: 133,
-						friction: 22,
-						clamp: false
-					}
-				}
-			: {
-					top: isScrollingDown ? -HEADER_HEIGHT * 1.2 : 0,
-					// height: isScrollingDown ? 0 : HEADER_HEIGHT,
-					opacity: !isScrollingDown ? 0.7 : 0,
-					config: {
-						mass: 4,
-						tension: 133,
-						friction: 22,
-						clamp: false
-					}
-				}
-	);
+	const animated_top_style = useSpring({
+		top: isScrollingDown ? -HEADER_HEIGHT * 1.2 : 0,
+		height: isScrollingDown ? 0 : HEADER_HEIGHT,
+		opacity: !isScrollingDown ? 0.7 : 0,
+		config: {
+			mass: 4,
+			tension: 133,
+			friction: 22,
+			clamp: false
+		}
+	});
 
 	return (
 		<AnimatedHeader role="header" className={baseHeader} style={animated_top_style}>
