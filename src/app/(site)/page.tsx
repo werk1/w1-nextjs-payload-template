@@ -10,7 +10,7 @@ import { SectionTwo } from '@/components/page-one/SectionTwo';
 
 enum HeaderPosition {
 	center = 'center',
-	left = 'left',‚
+	left = 'left',
 	right = 'right',
 }
 ‚
