@@ -18,7 +18,7 @@
     background-color: var(--col_background-dark);
 }
 
-.baseMobileLandscape {
+.baseMobileLandscapeCenter {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -30,7 +30,7 @@
     opacity: 0.7;
 }
 
-.baseLeftMobileLandscape {
+.baseMobileLandscapeLeft {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -42,7 +42,7 @@
     opacity: 0.7;
 }
 
-.baseRightMobileLandscape {
+.baseMobileLandscapeRight {
     position: fixed;
     display: flex;
     flex-direction: column;

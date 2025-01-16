@@ -12,7 +12,7 @@ interface FooterProps {
 }
 
 const Footer = ({ children }: FooterProps) => {
-  const { isPhonePortrait, isPhoneLandscape, isDesktop } = useBoundStore((state) => state.device) ?? {}
+  const { isPhonePortrait, isPhoneLandscape, isDesktop } = useBoundStore((state) => state.device)
   const classFooter = isPhonePortrait
     ? styles.layoutMobilePortrait
     : isPhoneLandscape

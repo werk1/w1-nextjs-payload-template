@@ -8,32 +8,29 @@ import Header from '@/components/header/Header';
 import { useBoundStore } from '@/stores/boundStore';
 import { SectionTwo } from '@/components/page-one/SectionTwo';
 
-export enum HeaderPosition {
-	Center = 'center',
-	Left = 'left',
-	Right = 'right'
-  }
-
-  
 export default function HomePage() {
-	const headerPosition: HeaderPosition = HeaderPosition.Center;
-	const isHeaderLeft = true;
-	const contentScrollMode = false;
-	const { isPhonePortrait, isPhoneLandscape, isDesktop } = useBoundStore((state) => state.device);
+	const {
+		isPhonePortrait,
+		isPhoneLandscapeCenter,
+		isPhoneLandscapeLeft,
+		isPhoneLandscapeRight,
+		isDesktopScrollModeContent,
+		isDesktopScrollModePage
+	} = useBoundStore((state) => state.device);
 
 	const classContent = (() => {
-		if (isPhoneLandscape && headerPosition === HeaderPosition.Left as HeaderPosition) return stylesContent.contentMobileLandscapeLeft;
-		if (isPhoneLandscape && headerPosition === HeaderPosition.Right as HeaderPosition) return stylesContent.contentMobileLandscapeRight;
-		if (isPhoneLandscape && headerPosition === HeaderPosition.Center as HeaderPosition) return stylesContent.contentMobileLandscape;
+		if (isPhoneLandscapeCenter) return stylesContent.contentMobileLandscapeCenter;
+		if (isPhoneLandscapeLeft) return stylesContent.contentMobileLandscapeLeft;
+		if (isPhoneLandscapeRight) return stylesContent.contentMobileLandscapeRight;
 		if (isPhonePortrait) return stylesContent.contentMobilePortrait;
-		if (isDesktop && contentScrollMode) return stylesContent.contentDesktopContentScroll;
-		if (isDesktop && !contentScrollMode) return stylesContent.contentDesktopPageScroll;
+		if (isDesktopScrollModeContent) return stylesContent.contentDesktopContentScroll;
+		if (isDesktopScrollModePage) return stylesContent.contentDesktopPageScroll;
 		return stylesContent.contentDesktopPageScroll; // default fallback
 	})();
 
 	return (
 		<div className={classContent}>
-			<Header hideHeaderOnContentScroll={false} isHeaderLeft={isHeaderLeft} headerPosition={headerPosition} />
+			<Header hideHeaderOnContentScroll={false} />
 			<div className={styles.container}>
 				<h1 className={styles.mainTitle}>
 					Welcome <br /> to Your <br /> new App

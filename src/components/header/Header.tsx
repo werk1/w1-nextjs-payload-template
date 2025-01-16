@@ -10,24 +10,22 @@ import { HEADER_HEIGHT } from '@/styles/constants/constants';
 // Create a properly typed animated header component
 const AnimatedHeader = animated('header');
 
-enum HeaderPosition {
-  Center = 'center',
-  Left = 'left',
-  Right = 'right'
-}
-
 export type HeaderProps = {
 	hideHeaderOnContentScroll: boolean;
-	isHeaderLeft: boolean;
 	children?: React.ReactNode;
-	headerPosition: HeaderPosition;
 };
 
 /**
  * Header component that adapts to different device types and scroll behavior.
  */
 function Header(props: HeaderProps) {
-	const { isPhonePortrait, isPhoneLandscape, isDesktop } = useBoundStore((state) => state.device);
+	const {
+		isPhonePortrait,
+		isPhoneLandscapeCenter,
+		isPhoneLandscapeLeft,
+		isPhoneLandscapeRight,
+		isDesktop
+	} = useBoundStore((state) => state.device);
 	const { isScrollingDown } = useScrollDirection(
 		0.33, // velocityUp
 		0.33, // velocityDown
@@ -37,14 +35,14 @@ function Header(props: HeaderProps) {
 	// Determine base header class based on device type and orientation
 	let baseHeader = styles.baseDesktop; // default value
 
-	if (isPhoneLandscape && props.headerPosition === HeaderPosition.Left) {
-		baseHeader = styles.baseMobileLandscape;
-	} else if (isPhoneLandscape && props.headerPosition === HeaderPosition.Right) {
-		baseHeader = styles.baseRightMobileLandscape;
+	if (isPhoneLandscapeLeft) {
+		baseHeader = styles.baseMobileLandscapeLeft;
+	} else if (isPhoneLandscapeRight) {
+		baseHeader = styles.baseMobileLandscapeRight;
+	} else if (isPhoneLandscapeCenter) {
+		baseHeader = styles.baseMobileLandscapeCenter;
 	} else if (isPhonePortrait) {
 		baseHeader = styles.baseMobilePortrait;
-	} else if (isPhoneLandscape && props.headerPosition === HeaderPosition.Center) {
-		baseHeader = styles.baseMobileLandscape;
 	}
 
 	// const baseHeader = useResponsiveClass({
@@ -59,7 +57,7 @@ function Header(props: HeaderProps) {
 
 	// Configure spring animation for header visibility
 	const animated_top_style = useSpring(
-		isPhoneLandscape
+		isPhoneLandscapeCenter
 			? {
 					top: isScrollingDown ? -HEADER_HEIGHT * 1.2 : 0,
 					height: isScrollingDown ? 0 : HEADER_HEIGHT,

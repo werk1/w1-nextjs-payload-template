@@ -57,3 +57,4 @@ export const installedLocalFonts = [
 ]
 export const installedGoogleFonts = [inter.className]
 export const installedFonts = [...installedLocalFonts, ...installedGoogleFonts].join(' ')
+
