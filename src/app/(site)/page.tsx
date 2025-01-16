@@ -1,17 +1,38 @@
+'use client';
+
 import Footer from '@/components/footer/Footer';
 import FooterIcons from '@/components/footer/FooterIcons';
 import styles from '@/styles/modules/Layout.module.css';
-// import FillBottomSpace from '@/components/footer/FillBottomSpace'
+import stylesContent from '@/styles/modules/Content.module.css';
 import Header from '@/components/header/Header';
-// import { useBoundStore } from '@/stores/boundStore'
+import { useBoundStore } from '@/stores/boundStore';
 import { SectionTwo } from '@/components/page-one/SectionTwo';
 
+enum HeaderPosition {
+	center = 'center',
+	left = 'left',‚
+	right = 'right',
+}
+‚
 export default function HomePage() {
-	// const isDesktop = useBoundStore((state) => state.device.isDesktop)
+	const headerPosition = HeaderPosition.center; // This allows all three values
+	const isHeaderLeft = true;
+	const contentScrollMode = false;
+	const { isPhonePortrait, isPhoneLandscape, isDesktop } = useBoundStore((state) => state.device);
+
+	const classContent = (() => {
+		if (isPhoneLandscape && headerPosition == HeaderPosition.left) return stylesContent.contentMobileLandscapeLeft;
+		if (isPhoneLandscape && headerPosition == HeaderPosition.right) return stylesContent.contentMobileLandscapeRight;
+		if (isPhoneLandscape && headerPosition == HeaderPosition.center) return stylesContent.contentMobileLandscape;
+		if (isPhonePortrait) return stylesContent.contentMobilePortrait;
+		if (isDesktop && contentScrollMode) return stylesContent.contentDesktopContentScroll;
+		if (isDesktop && !contentScrollMode) return stylesContent.contentDesktopPageScroll;
+		return stylesContent.contentDesktopPageScroll;
+	})();
 
 	return (
-		<div>
-			<Header hideHeaderOnContentScroll={false} isHeaderLeft={true} />
+		<div className={classContent}>
+			<Header hideHeaderOnContentScroll={false} isHeaderLeft={isHeaderLeft} headerPosition={headerPosition} />
 			<div className={styles.container}>
 				<h1 className={styles.mainTitle}>
 					Welcome <br /> to Your <br /> new App
@@ -39,9 +60,6 @@ export default function HomePage() {
 			<Footer>
 				<FooterIcons />
 			</Footer>
-			{/* {isDesktop && (
-        <FillBottomSpace />
-      )} */}
 		</div>
 	);
 }

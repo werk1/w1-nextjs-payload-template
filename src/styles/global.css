@@ -21,6 +21,7 @@
     --par-copy: var(--typo_body), 16px, 1.5;
 
     /* measures */
+    --measure-margin-left-mobile_l: 180px;
     --measure-header-height: 320px;
     --measure-header-width_mobile_l: 240px;
 

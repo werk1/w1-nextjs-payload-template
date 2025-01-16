@@ -35,6 +35,14 @@
     /* background-color: aqua; */
 }
 
+.contentMobileLandscape {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: var(--measure-margin-left-mobile_l);
+    /* background-color: aqua; */
+}
+
 .contentMobileLandscapeRight {
     flex: 1;
     display: flex;
