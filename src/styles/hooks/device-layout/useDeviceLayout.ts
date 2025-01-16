@@ -18,26 +18,28 @@ export function useDeviceLayout() {
   } = deviceState;
 
   const contentClass = (() => {
-    if (isPhoneLandscapeCenter) return stylesContent.contentMobileLandscapeCenter;
-    if (isPhoneLandscapeLeft) return stylesContent.contentMobileLandscapeLeft;
-    if (isPhoneLandscapeRight) return stylesContent.contentMobileLandscapeRight;
-    if (isPhonePortrait) return stylesContent.contentMobilePortrait;
-    if (isDesktopScrollModeContent) return stylesContent.contentDesktopContentScroll;
-    if (isDesktopScrollModePage) return stylesContent.contentDesktopPageScroll;
-    return stylesContent.contentDesktopPageScroll;
+    if (isPhoneLandscapeCenter) return stylesContent.containerContentMobileLandscapeCenter;
+    if (isPhoneLandscapeLeft) return stylesContent.containerContentMobileLandscapeLeft;
+    if (isPhoneLandscapeRight) return stylesContent.containerContentMobileLandscapeRight;
+    if (isPhonePortrait) return stylesContent.containerContentMobilePortrait;
+    if (isDesktopScrollModeContent) return stylesContent.containerContentDesktopContentScroll;
+    if (isDesktopScrollModePage) return stylesContent.containerContentDesktopPageScroll;
+    return stylesContent.containerContentDesktopPageScroll;
   })();
 
   const headerClass = (() => {
-    if (isPhoneLandscapeLeft) return stylesHeader.baseMobileLandscapeLeft;
-    if (isPhoneLandscapeRight) return stylesHeader.baseMobileLandscapeRight;
-    if (isPhoneLandscapeCenter) return stylesHeader.baseMobileLandscapeCenter;
-    if (isPhonePortrait) return stylesHeader.baseMobilePortrait;
-    return stylesHeader.baseDesktop;
+    if (isPhonePortrait) return stylesHeader.containerHeaderMobilePortrait;
+    if (isPhoneLandscapeCenter) return stylesHeader.containerHeaderMobileLandscapeCenter;
+    if (isPhoneLandscapeLeft) return stylesHeader.containerHeaderMobileLandscapeLeft;
+    if (isPhoneLandscapeRight) return stylesHeader.containerHeaderMobileLandscapeRight;
+    return stylesHeader.containerHeaderDesktop;
   })();
 
   const footerClass = (() => {
     if (isPhonePortrait) return stylesFooter.containerFooterMobilePortrait;
     if (isPhoneLandscapeCenter) return stylesFooter.containerFooterMobileLandscapeCenter;
+    if (isPhoneLandscapeLeft) return stylesFooter.containerFooterMobileLandscapeLeft;
+    if (isPhoneLandscapeRight) return stylesFooter.containerFooterMobileLandscapeRight;
     return stylesFooter.containerFooterDesktop;
   })();
 

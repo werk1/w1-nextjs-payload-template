@@ -1,5 +1,6 @@
 'use client';
 import styles from '@/styles/modules/Layout.module.css';
+import stylesTypography from '@/styles/modules/Typography.module.css';
 import { DeviceLayout } from '@/components/device-layout/DeviceLayout';
 import { SectionTwo } from '@/components/landing-page/SectionTwo';
 import Header from '@/components/header/Header';
@@ -14,7 +15,7 @@ export default function LandingPage() {
 		<DeviceLayout>
 			<Header headerClass={headerClass} />
 			<div className={styles.container}>
-				<h1 className={styles.mainTitle}>
+				<h1 className={stylesTypography.mainTitle}>
 					Welcome <br /> to Your <br /> new App
 				</h1>
 				<section>
@@ -27,10 +28,10 @@ export default function LandingPage() {
 					</p>
 					<h2 className={styles.title}>Features</h2>
 					<ul className={styles.list}>
-						<li className={styles.listItemCustom}>Payload CMS Integration</li>
-						<li className={styles.listItemCustom}>Next.js App Router</li>
-						<li className={styles.listItemCustom}>TypeScript Support</li>
-						<li className={styles.listItemCustom}>Custom Font Integration</li>
+						<li className={stylesTypography.listItemCustom}>Payload CMS Integration</li>
+						<li className={stylesTypography.listItemCustom}>Next.js App Router</li>
+						<li className={stylesTypography.listItemCustom}>TypeScript Support</li>
+						<li className={stylesTypography.listItemCustom}>Custom Font Integration</li>
 					</ul>
 					<h2 className={styles.title}>
 						You don't <br />know!

@@ -39,9 +39,11 @@ body {
     --typo_body-bold: var(--fontGtAmericaStandardBold);
     --typo_body-thin: var(--fontGtAmericaStandardThin);
     --typo_heading: var(--fontGtAmericaStandardBlack);
+    --typo_heading-bold: var(--fontGtAmericaStandardBold);
 
     /* paragraphs */
     --par_copy: var(--typo_body), 16px, 1.5;
+    --par_titel: var(--typo_heading-black), 6rem, 0.8;
 
     /* measures */
     --measure_margin_left_mobile_l_center: 8%;
@@ -51,8 +53,9 @@ body {
     --measure_margin_left_mobile_l_right: 22%;
     --measure_margin_right_mobile_l_right: 0%;
     --measure_header_height: 260px;
-    --measure_header_width_mobile_l: 70%;
-
+    --measure_header_width_mobile_l: 75%;
+    --measure_footer_height_mobile_portrait: 160px;
+    --measure_footer_height_mobile_landscape: 110px;
 }
 
 /* Optional but recommended */

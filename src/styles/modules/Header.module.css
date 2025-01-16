@@ -1,4 +1,4 @@
-.baseDesktop {
+.containerHeaderDesktop {
     position: fixed;
     height: var(--measure_header_height);
     width: 100%;
@@ -8,7 +8,7 @@
     background-color: var(--col_background_dark);
 }
 
-.baseMobilePortrait {
+.containerHeaderMobilePortrait {
     position: fixed;
     height: var(--measure_header_height);
     width: 100%;
@@ -18,7 +18,7 @@
     background-color: var(--col_background_dark);
 }
 
-.baseMobileLandscapeCenter {
+.containerHeaderMobileLandscapeCenter {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -30,7 +30,7 @@
     opacity: 0.7;
 }
 
-.baseMobileLandscapeLeft {
+.containerHeaderMobileLandscapeLeft {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -42,7 +42,7 @@
     opacity: 0.7;
 }
 
-.baseMobileLandscapeRight {
+.containerHeaderMobileLandscapeRight {
     position: fixed;
     display: flex;
     flex-direction: column;

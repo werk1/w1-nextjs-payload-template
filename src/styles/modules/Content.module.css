@@ -1,34 +1,17 @@
-.contentDesktopPageScroll {
+.containerContentDesktopPageScroll {
     display: flex;
     flex-direction: column;
     /* background-color: aqua; */
 }
 
-.contentDesktopContentScroll {
+.containerContentDesktopContentScroll {
     display: flex;
     flex-direction: column;
     height: 100vh;
     overflow: auto;
-    /* scrollbar-width: none;
-    scrollbar-color: transparent transparent; */
 }
 
-/* .contentDesktopContentScroll::-webkit-scrollbar {
-    display: none;
-    background-color: transparent;
-}
-
-.contentDesktopContentScroll::-webkit-scrollbar-thumb {
-    display: none;
-    background-color: transparent;
-}
-
-.contentDesktopContentScroll::-webkit-scrollbar-track {
-    display: none;
-    background-color: transparent;
-} */
-
-.contentMobilePortrait {
+.containerContentMobilePortrait {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -37,7 +20,7 @@
     /* background-color: aqua; */
 }
 
-.contentMobileLandscapeCenter {
+.containerContentMobileLandscapeCenter {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -45,14 +28,14 @@
     width: 75%;
 }
 
-.contentMobileLandscapeRight {
+.containerContentMobileLandscapeRight {
     flex: 1;
     display: flex;
     flex-direction: column;
     margin-right: var(--measure_margin_right_mobile_l_right);
 }
 
-.contentMobileLandscapeLeft {
+.containerContentMobileLandscapeLeft {
     flex: 1;
     display: flex;
     flex-direction: column;
