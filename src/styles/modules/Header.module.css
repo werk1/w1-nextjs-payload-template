@@ -1,21 +1,21 @@
 .baseDesktop {
     position: fixed;
-    height: var(--measure-header-height);
+    height: var(--measure_header_height);
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: var(--col_background-dark);
+    background-color: var(--col_background_dark);
 }
 
 .baseMobilePortrait {
     position: fixed;
-    height: var(--measure-header-height);
+    height: var(--measure_header_height);
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: var(--col_background-dark);
+    background-color: var(--col_background_dark);
 }
 
 .baseMobileLandscapeCenter {
@@ -23,10 +23,10 @@
     display: flex;
     flex-direction: column;
     top: 0;
-    left: var(--measure-margin-left-mobile_l);
-    width: 100%;
+    left: var(--measure_margin_left_mobile_l_center);
+    width: 75%;
     height: 100vh;
-    background-color: var(--col_background-dark);
+    background-color: var(--col_background_dark);
     opacity: 0.7;
 }
 
@@ -36,9 +36,9 @@
     flex-direction: column;
     top: 0;
     left: 0;
-    width: var(--measure-header-width_mobile_l);
+    width: var(--measure_header_width_mobile_l_left);
     height: 100vh;
-    background-color: var(--col_background-dark);
+    background-color: var(--col_background_dark);
     opacity: 0.7;
 }
 
@@ -48,9 +48,9 @@
     flex-direction: column;
     top: 0;
     right: 0;
-    width: var(--measure-header-width_mobile_l);
+    width: var(--measure_header_width_mobile_l_right);
     height: 100vh;
-    background-color: var(--col_background-dark);
+    background-color: var(--col_background_dark);
     opacity: 0.7;
 }
 

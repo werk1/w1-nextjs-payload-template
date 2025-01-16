@@ -1,12 +1,35 @@
-:root {
+/* Base reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
+/* Root level reset */
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin-left: 0;
+    margin-right: 0;
+    /* padding: 0; */
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
     /* colors */
-    --col_primary-color: #333;
-    --col_secondary-color: #666;
-    --col_accent-color: #f90;
-    --col_text-color: #333;
-    --col_background-light: #f2f2f2;
-    --col_background-dark: #202020;
+    --col_primary_color: #333;
+    --col_secondary_color: #666;
+    --col_accent_color: #f90;
+    --col_text_color: #333;
+    --col_background_light: #f2f2f2;
+    --col_background_dark: #202020;
 
     --col_menu_icons: #e7c03e;
     --col_menu_icons_hover: #ccbc87;
@@ -18,11 +41,39 @@
     --typo_heading: var(--fontGtAmericaStandardBlack);
 
     /* paragraphs */
-    --par-copy: var(--typo_body), 16px, 1.5;
+    --par_copy: var(--typo_body), 16px, 1.5;
 
     /* measures */
-    --measure-margin-left-mobile_l: 180px;
-    --measure-header-height: 320px;
-    --measure-header-width_mobile_l: 240px;
+    --measure_margin_left_mobile_l_center: 8%;
+    --measure_margin_right_mobile_l_center: 22%;
+    --measure_margin_left_mobile_l_left: 0%;
+    --measure_margin_right_mobile_l_left: 22%;
+    --measure_margin_left_mobile_l_right: 22%;
+    --measure_margin_right_mobile_l_right: 0%;
+    --measure_header_height: 260px;
+    --measure_header_width_mobile_l: 70%;
 
+}
+
+/* Optional but recommended */
+#__next,
+/* for Next.js */
+main {
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Remove default button styles */
+button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Ensure images don't create unwanted space */
+img {
+    display: block;
+    max-width: 100%;
+    /* height: auto; */
 }

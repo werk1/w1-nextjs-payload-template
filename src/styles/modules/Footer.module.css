@@ -1,6 +1,6 @@
 .layoutDesktop {
     width: 100%;
-    background-color: var(--col_background-dark);
+    background-color: var(--col_background_dark);
     color: white;
     text-align: center;
     font-size: 15px;
@@ -9,7 +9,7 @@
 }
 
 .layoutMobilePortrait {
-    background-color: var(--col_background-dark);
+    background-color: var(--col_background_dark);
     color: white;
     text-align: center;
     font-size: 15px;
@@ -17,8 +17,8 @@
     flex-grow: 1;
 }
 
-.layoutMobileLandscape {
-    background-color: var(--col_background-dark);
+.layoutMobileLandscapeCenter {
+    background-color: var(--col_background_dark);
     color: white;
     text-align: center;
     font-size: 15px;
