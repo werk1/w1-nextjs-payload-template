@@ -1,17 +1,17 @@
-'use client'
+// 'use client'
 
-import { useBoundStore } from '@/stores/boundStore'
+import { useBoundStore } from '@/stores/boundStore';
 
 const FillBottomSpace = () => {
-  const remainingSpace = useBoundStore((state) => state.remainingSpace.value)
+	const remainingSpace = useBoundStore((state) => state.remainingSpace.value);
 
-  const styles = {
-    container: {
-      height: remainingSpace,
-      backgroundColor: "var(--col_background-dark)",
-    } as React.CSSProperties
-  }
-  return <div style={styles.container}></div>
-}
+	const styles = {
+		container: {
+			height: remainingSpace,
+			backgroundColor: 'var(--col_background-dark)'
+		} as React.CSSProperties
+	};
+	return <div style={styles.container} />;
+};
 
-export default FillBottomSpace
+export default FillBottomSpace;

@@ -1,28 +1,32 @@
-.layoutDesktop {
+.containerFooterDesktop {
     width: 100%;
-    background-color: var(--col_background-dark);
+    height: var(--measure_footer_height_mobile_landscape);
+    background-color: var(--col_background_dark);
     color: white;
     text-align: center;
     font-size: 15px;
-    padding-bottom: 40px;
+    padding-bottom: 60px;
     flex-grow: 1;
 }
 
-.layoutMobilePortrait {
-    background-color: var(--col_background-dark);
+.containerFooterMobilePortrait {
+    background-color: var(--col_background_dark);
+    height: var(--measure_footer_height_mobile_portrait);
     color: white;
     text-align: center;
     font-size: 15px;
-    padding-bottom: 40px;
+    padding-bottom: 60px;
     flex-grow: 1;
 }
 
-.layoutMobileLandscape {
-    background-color: var(--col_background-dark);
+.containerFooterMobileLandscapeCenter {
+    background-color: var(--col_background_dark);
+    height: var(--measure_footer_height_mobile_landscape);
     color: white;
     text-align: center;
     font-size: 15px;
-    padding-bottom: 40px;
+    padding-bottom: 60px;
+    flex-grow: 1;
 
 }
 

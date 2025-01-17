@@ -1,34 +1,22 @@
-'use client'
-
-import { RemainingSpaceTracker } from '@/stores/remaining-space'
-import { ReactNode } from 'react'
-import styles from '../../styles/modules/Footer.module.css'
-import { useBoundStore } from '@/stores/boundStore'
-import FillBottomSpace from '@/components/footer/FillBottomSpace'
+import { RemainingSpaceTracker } from '@/stores/remaining-space';
+import { ReactNode } from 'react';
+import FillBottomSpace from '@/components/footer/FillBottomSpace';
 
 interface FooterProps {
-  children: ReactNode
-  className?: string
+	children: ReactNode;
+	footerClass: string;
+	isDesktop: boolean;
 }
 
-const Footer = ({ children }: FooterProps) => {
-  const { isPhonePortrait, isPhoneLandscape, isDesktop } = useBoundStore((state) => state.device) ?? {}
-  const classFooter = isPhonePortrait
-    ? styles.layoutMobilePortrait
-    : isPhoneLandscape
-      ? styles.layoutMobileLandscape
-      : styles.layoutDesktop
+const Footer = ({ children, footerClass, isDesktop }: FooterProps) => {
+	return (
+		<div>
+			<RemainingSpaceTracker />
+			<div className={footerClass}>{children}</div>
+			{isDesktop && <FillBottomSpace />}
+		</div>
+	);
+};
 
-  return (
-    <>
-      <RemainingSpaceTracker />
-      <div className={classFooter}>
-        {children}
-      </div>
-      {isDesktop && <FillBottomSpace />}
-    </>
-  )
-}
-
-Footer.displayName = 'Footer'
-export default Footer
+Footer.displayName = 'Footer';
+export default Footer;
