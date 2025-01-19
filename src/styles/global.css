@@ -52,8 +52,11 @@ body {
     --measure_margin_right_mobile_l_left: 22%;
     --measure_margin_left_mobile_l_right: 22%;
     --measure_margin_right_mobile_l_right: 0%;
-    --measure_header_height: 260px;
+
+    --measure_header_height_mobile_portrait: 200px;
+    --measure_header_height_mobile_landscape: 200px;
     --measure_header_width_mobile_l: 75%;
+    
     --measure_footer_height_mobile_portrait: 160px;
     --measure_footer_height_mobile_landscape: 110px;
 }

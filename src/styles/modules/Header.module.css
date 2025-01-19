@@ -10,49 +10,53 @@
 
 .containerHeaderMobilePortrait {
     position: fixed;
-    height: var(--measure_header_height);
+    height: var(--measure_header_height_mobile_portrait);
     width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    padding-top: 30px;
     background-color: var(--col_background_dark);
+    align-items: center;
+    opacity: 0.7;
+    z-index: 2;
 }
+
 
 .containerHeaderMobileLandscapeCenter {
     position: fixed;
     display: flex;
     flex-direction: column;
+    height: var(--measure_header_height_mobile_landscape);
     top: 0;
     left: var(--measure_margin_left_mobile_l_center);
     width: 75%;
-    height: 100vh;
     background-color: var(--col_background_dark);
     opacity: 0.7;
 }
-
 .containerHeaderMobileLandscapeLeft {
     position: fixed;
     display: flex;
     flex-direction: column;
+    height: var(--measure_header_height_mobile_landscape);
     top: 0;
     left: 0;
     width: var(--measure_header_width_mobile_l_left);
-    height: 100vh;
     background-color: var(--col_background_dark);
     opacity: 0.7;
 }
-
 .containerHeaderMobileLandscapeRight {
     position: fixed;
     display: flex;
     flex-direction: column;
+    height: var(--measure_header_height_mobile_landscape);
     top: 0;
     right: 0;
     width: var(--measure_header_width_mobile_l_right);
-    height: 100vh;
     background-color: var(--col_background_dark);
     opacity: 0.7;
 }
+
+
 
 .toggleSideIcon {
     align-self: flex-start;

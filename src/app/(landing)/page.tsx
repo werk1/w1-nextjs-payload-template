@@ -7,19 +7,48 @@ import Header from '@/components/header/Header';
 import Footer from '@/components/footer/Footer';
 import FooterIcons from '@/components/footer/FooterIcons';
 import { useDeviceLayout } from '@/styles/hooks/device-layout/useDeviceLayout';
+import Image from 'next/image';
+import roseImage from './_assets/DSF9873_FB.png'; // Import the image
+import { useEffect, useState } from 'react';
 
 export default function LandingPage() {
+	const [ isLoaded, setIsLoaded ] = useState(false);
+
 	const { headerClass, footerClass, deviceState } = useDeviceLayout();
+
+	useEffect(() => {
+		document.body.classList.add('loaded');
+		setIsLoaded(true);
+	}, []);
+
+	if (!isLoaded) {
+		return <div className={styles.loadingScreen}>Loading...</div>;
+	}
 
 	return (
 		<DeviceLayout>
-			<Header headerClass={headerClass} />
-			<div className={styles.container}>
+			<Header headerClass={headerClass}>
+				<h1 className={stylesTypography.headerTitle}>now!</h1>
+			</Header>
+			<div className={styles.container} style={{ marginTop: 140 }}>
 				<h1 className={stylesTypography.mainTitle}>
 					Welcome <br /> to Your <br /> new App
 				</h1>
 				<section>
 					<SectionTwo />
+					<Image
+						src={roseImage} // Use the imported image
+						alt="Featured Image"
+						sizes="100%"
+						style={{
+							objectFit: 'cover',
+							objectPosition: 'center',
+							width: '100%',
+							height: '100%'
+						}}
+						priority // If this is above the fold
+						className={styles.heroImage} // Optional: for styling
+					/>
 					<h2 className={styles.title}>
 						Some things <br />about
 					</h2>
