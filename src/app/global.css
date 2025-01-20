@@ -53,8 +53,10 @@ body {
     --measure_margin_left_mobile_l_right: 22%;
     --measure_margin_right_mobile_l_right: 0%;
 
+    /* header */
     --measure_header_height_mobile_portrait: 200px;
     --measure_header_height_mobile_landscape: 200px;
+    --measure_header_height_desktop: 190px;
     --measure_header_width_mobile_l: 75%;
     
     --measure_footer_height_mobile_portrait: 160px;

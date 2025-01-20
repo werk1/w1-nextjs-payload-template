@@ -8,8 +8,10 @@ import Footer from '@/components/footer/Footer';
 import FooterIcons from '@/components/footer/FooterIcons';
 import { useDeviceLayout } from '@/styles/hooks/device-layout/useDeviceLayout';
 import Image from 'next/image';
-import roseImage from './_assets/DSF9873_FB.png'; // Import the image
+import roseImage_1 from './_assets/DSF9873_FB.png'; // Import the image
+import roseImage_2 from './_assets/DSF9810_FB.png'; // Import the image
 import { useEffect, useState } from 'react';
+import { ImageSlider } from '@/components/image-slider/ImageSlider';
 
 export default function LandingPage() {
 	const [ isLoaded, setIsLoaded ] = useState(false);
@@ -25,6 +27,27 @@ export default function LandingPage() {
 		return <div className={styles.loadingScreen}>Loading...</div>;
 	}
 
+	const localSlides = [
+  {
+    type: 'local' as const,
+    src: roseImage_1,
+    alt: 'Featured Image',
+    width: roseImage_1.width,
+    height: roseImage_1.height,
+    // title: 'Welcome',
+    // description: 'Experience something new'
+  },
+  {
+			type: 'local' as const,
+			src: roseImage_2,
+			alt: 'Second Slide',
+			width: roseImage_2.width,
+			height: roseImage_2.height,
+			// title: 'Discover',
+			// description: 'Find what you love'
+  }
+	];
+
 	return (
 		<DeviceLayout>
 			<Header headerClass={headerClass}>
@@ -36,8 +59,14 @@ export default function LandingPage() {
 				</h1>
 				<section>
 					<SectionTwo />
-					<Image
-						src={roseImage} // Use the imported image
+        <ImageSlider 
+          slides={localSlides}
+          autoPlayInterval={5000}
+          showDots={true}
+          showArrows={false}
+        />					
+				{/* <Image
+						src={roseImage_1} // Use the imported image
 						alt="Featured Image"
 						sizes="100%"
 						style={{
@@ -48,7 +77,7 @@ export default function LandingPage() {
 						}}
 						priority // If this is above the fold
 						className={styles.heroImage} // Optional: for styling
-					/>
+					/> */}
 					<h2 className={styles.title}>
 						Some things <br />about
 					</h2>
