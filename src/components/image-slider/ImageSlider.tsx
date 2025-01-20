@@ -1,16 +1,16 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
-import Image, { StaticImageData } from 'next/image'; // Add StaticImageData import
+import { useState, useCallback, useRef, useEffect } from 'react';
+import Image, { StaticImageData } from 'next/image';
+import { useSpring, animated } from '@react-spring/web';
 import styles from '@/styles/modules/ImageSlider.module.css';
 
-// Base interfaces
+// Interfaces
 interface BaseSlide {
   title?: string;
   description?: string;
 }
 
-// Local data interface
 interface LocalSlide extends BaseSlide {
   type: 'local';
   src: string | StaticImageData;
@@ -19,7 +19,6 @@ interface LocalSlide extends BaseSlide {
   height: number;
 }
 
-// Payload data interface
 interface PayloadImage {
   id: string;
   url: string;
@@ -33,11 +32,11 @@ interface PayloadSlide extends BaseSlide {
   image: PayloadImage;
 }
 
-// Combined type
 type Slide = LocalSlide | PayloadSlide;
 
 interface ImageSliderProps {
   slides: Slide[];
+  autoPlay?: boolean;
   autoPlayInterval?: number;
   showDots?: boolean;
   showArrows?: boolean;
@@ -46,17 +45,31 @@ interface ImageSliderProps {
 
 export const ImageSlider = ({
   slides,
+  autoPlay = true,
   autoPlayInterval = 5000,
   showDots = true,
   showArrows = true,
   className = '',
 }: ImageSliderProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(autoPlay);
+  const touchStartX = useRef<number>(0);
+  const touchingSlider = useRef<boolean>(false);
+  const minSwipeDistance = 50;
+  const slideWidth = useRef<number>(0);
+  const autoPlayTimer = useRef<NodeJS.Timeout>(null);
 
-  // Helper function to get image props
+  const AnimatedDiv = animated('div');
+
+  const [{ x }, api] = useSpring(() => ({
+    x: 0,
+    config: { 
+      tension: 270,
+      friction: 32,
+      clamp: true
+    }
+  }));
+
   const getImageProps = (slide: Slide) => {
     if (slide.type === 'local') {
       return {
@@ -84,73 +97,129 @@ export const ImageSlider = ({
 
   const goToSlide = useCallback((index: number) => {
     setCurrentIndex(index);
-  }, []);
+    api.start({ x: 0, immediate: false });
+  }, [api]);
 
-  // Auto-play functionality
+  // Autoplay effect
   useEffect(() => {
-    if (!isAutoPlaying) return;
-
-    const timer = setInterval(nextSlide, autoPlayInterval);
-    return () => clearInterval(timer);
-  }, [isAutoPlaying, autoPlayInterval, nextSlide]);
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') {
-        previousSlide();
-      } else if (event.key === 'ArrowRight') {
-        nextSlide();
+    if (autoPlay && isAutoPlaying && slides.length > 1) {
+      autoPlayTimer.current = setTimeout(nextSlide, autoPlayInterval);
+    }
+    return () => {
+      if (autoPlayTimer.current) {
+        clearTimeout(autoPlayTimer.current);
       }
     };
+  }, [isAutoPlaying, currentIndex, nextSlide, slides.length, autoPlayInterval, autoPlay]);
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [nextSlide, previousSlide]);
-
-  // Touch handling
-  const minSwipeDistance = 50;
-
-  const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsAutoPlaying(false);
+    touchingSlider.current = true;
+    touchStartX.current = e.touches[0].clientX;
+    slideWidth.current = e.currentTarget.clientWidth;
+    api.start({ x: 0, immediate: true });
   };
 
-  const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchingSlider.current) return;
     
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
+    const currentX = e.touches[0].clientX;
+    const diff = currentX - touchStartX.current;
+    
+    if (Math.abs(diff) > 10) {
+      e.preventDefault();
+    }
+    
+    api.start({ x: diff, immediate: true });
+  };
 
-    if (isLeftSwipe) {
-      nextSlide();
-    } else if (isRightSwipe) {
-      previousSlide();
+  const handleTouchEnd = () => {
+    if (!touchingSlider.current) return;
+    
+    touchingSlider.current = false;
+    const movement = x.get();
+    
+    if (Math.abs(movement) > minSwipeDistance) {
+      if (movement > 0) {
+        previousSlide();
+        api.start({ 
+          x: 0,
+          from: { x: movement },
+          immediate: false,
+          onRest: () => setIsAutoPlaying(autoPlay)
+        });
+      } else {
+        nextSlide();
+        api.start({ 
+          x: 0,
+          from: { x: movement },
+          immediate: false,
+          onRest: () => setIsAutoPlaying(autoPlay)
+        });
+      }
+    } else {
+      api.start({ 
+        x: 0, 
+        immediate: false,
+        onRest: () => setIsAutoPlaying(autoPlay)
+      });
     }
   };
 
-  // Early return if no slides
-  if (!slides.length) {
-    return null;
-  }
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsAutoPlaying(false);
+    touchingSlider.current = true;
+    touchStartX.current = e.clientX;
+    slideWidth.current = e.currentTarget.clientWidth;
+    api.start({ x: 0, immediate: true });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!touchingSlider.current) return;
+    const diff = e.clientX - touchStartX.current;
+    api.start({ x: diff, immediate: true });
+  };
+
+  const handleMouseUp = handleTouchEnd;
+
+    // For click events (arrows), we want immediate transitions
+  const handleArrowNext = () => {
+    nextSlide();
+    api.start({ 
+      x: 0,
+      from: { x: -slideWidth.current },
+      immediate: false
+    });
+  };
+
+  const handleArrowPrevious = () => {
+    previousSlide();
+    api.start({ 
+      x: 0,
+      from: { x: slideWidth.current },
+      immediate: false
+    });
+  };
+
+  if (!slides.length) return null;
 
   return (
     <div 
       className={`${styles.slider} ${className}`}
-      onMouseEnter={() => setIsAutoPlaying(false)}
-      onMouseLeave={() => setIsAutoPlaying(true)}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-      role="region"
-      aria-label="Image Slider"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
     >
-      <div className={styles.slideContainer}>
+      <AnimatedDiv 
+        className={styles.slideContainer}
+        style={{
+          transform: x.to(x => `translateX(${x}px)`)
+        }}
+      >
         {slides.map((slide, index) => {
           const imageProps = getImageProps(slide);
           
@@ -184,13 +253,13 @@ export const ImageSlider = ({
             </div>
           );
         })}
-      </div>
+      </AnimatedDiv>
 
       {showArrows && slides.length > 1 && (
         <>
           <button
             className={`${styles.arrow} ${styles.prev}`}
-            onClick={previousSlide}
+            onClick={handleArrowPrevious}
             aria-label="Previous slide"
             type="button"
           >
@@ -198,7 +267,7 @@ export const ImageSlider = ({
           </button>
           <button
             className={`${styles.arrow} ${styles.next}`}
-            onClick={nextSlide}
+            onClick={handleArrowNext}
             aria-label="Next slide"
             type="button"
           >
@@ -217,21 +286,11 @@ export const ImageSlider = ({
               }`}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
-              aria-current={index === currentIndex}
               type="button"
             />
           ))}
         </div>
       )}
-
-      <div className={styles.progress}>
-        <div 
-          className={styles.progressBar}
-          style={{
-            width: `${((currentIndex + 1) / slides.length) * 100}%`
-          }}
-        />
-      </div>
     </div>
   );
 };

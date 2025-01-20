@@ -61,7 +61,8 @@ export default function LandingPage() {
 					<SectionTwo />
         <ImageSlider 
           slides={localSlides}
-          autoPlayInterval={5000}
+          autoPlay={false}
+          // autoPlayInterval={5000}
           showDots={true}
           showArrows={false}
         />					
