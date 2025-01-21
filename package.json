@@ -24,6 +24,7 @@
     "@payloadcms/payload-cloud": "latest",
     "@payloadcms/richtext-lexical": "latest",
     "@react-spring/web": "^9.7.5",
+    "@use-gesture/react": "^10.3.1",
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
     "next": "15.1.0",

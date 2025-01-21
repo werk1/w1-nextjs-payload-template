@@ -12,6 +12,9 @@ import roseImage_1 from './_assets/DSF9873_FB.png'; // Import the image
 import roseImage_2 from './_assets/DSF9810_FB.png'; // Import the image
 import { useEffect, useState } from 'react';
 import { ImageSlider } from '@/components/image-slider/ImageSlider';
+import { ImageSliderUseTransition } from '@/components/image-slider/ImageSliderUseTransition';
+import { autocompleteClasses } from '@mui/material';
+import { ImageSliderReactSpring } from '@/components/image-slider/imageSliderReactSpring';
 
 export default function LandingPage() {
 	const [ isLoaded, setIsLoaded ] = useState(false);
@@ -30,21 +33,17 @@ export default function LandingPage() {
 	const localSlides = [
   {
     type: 'local' as const,
-    src: roseImage_1,
-    alt: 'Featured Image',
+    src: roseImage_1,  // StaticImageData from next/image import
+    alt: 'Image 1',
     width: roseImage_1.width,
-    height: roseImage_1.height,
-    // title: 'Welcome',
-    // description: 'Experience something new'
+    height: roseImage_1.height
   },
   {
-			type: 'local' as const,
-			src: roseImage_2,
-			alt: 'Second Slide',
-			width: roseImage_2.width,
-			height: roseImage_2.height,
-			// title: 'Discover',
-			// description: 'Find what you love'
+    type: 'local' as const,
+    src: roseImage_2,  // string URL
+    alt: 'Image 2',
+    width: roseImage_2.width,
+    height: roseImage_2.height
   }
 	];
 
@@ -59,13 +58,15 @@ export default function LandingPage() {
 				</h1>
 				<section>
 					<SectionTwo />
-        <ImageSlider 
+					<ImageSliderReactSpring slides={localSlides} />
+					<ImageSliderUseTransition slides={localSlides} />
+        {/* <ImageSlider 
           slides={localSlides}
-          autoPlay={false}
+						// autoPlay={false}
           // autoPlayInterval={5000}
           showDots={true}
           showArrows={false}
-        />					
+        />					 */}
 				{/* <Image
 						src={roseImage_1} // Use the imported image
 						alt="Featured Image"
