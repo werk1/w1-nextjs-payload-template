@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const useSliderAutoplay = (
+export const useImageSliderAutoplay = (
   nextSlide: () => void,
   isAutoPlaying: boolean,
   interval: number

@@ -5,9 +5,9 @@ import Image from 'next/image';
 import styles from './styles/ImageSliderUseTransition.module.css';
 import { ImageSliderProps } from './types/typesImageSlider';
 import { getImageProps, clamp } from './utils/utilsImageSlider';
-import { SliderControls } from './components/ImageSliderControls';
-import { useSliderAutoplay } from './hooks/useSliderAutoplay';
-import { SlideContent } from './components/ImageSliderContent';
+import { ImageSliderControls } from './components/ImageSliderControl';
+import { useImageSliderAutoplay } from './hooks/useImageSliderAutoplay';
+import { ImageSliderContent } from './components/ImageSliderContent';
 
 export const ImageSliderUseTransition = ({
 	slides,
@@ -38,7 +38,7 @@ export const ImageSliderUseTransition = ({
 		[ slides.length ]
 	);
 
-	useSliderAutoplay(nextSlide, isAutoPlaying, autoPlayInterval);
+	useImageSliderAutoplay(nextSlide, isAutoPlaying, autoPlayInterval);
 
 	const transitions = useTransition(index, {
 		from: {
@@ -92,12 +92,12 @@ export const ImageSliderUseTransition = ({
 							className={styles.image}
 							priority={i === 0}
 						/>
-						<SlideContent slide={slides[i]} />
+						<ImageSliderContent slide={slides[i]} />
 					</AnimatedDiv>
 				);
 			})}
 
-			<SliderControls
+			<ImageSliderControls
 				onNext={nextSlide}
 				onPrevious={previousSlide}
 				onDotClick={(i) => {

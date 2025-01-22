@@ -1,6 +1,6 @@
-import styles from '../styles/ImageSliderBase.module.css';
+import styles from '../styles/ImageSliderControl.module.css';
 
-interface SliderControlsProps {
+interface ImageSliderControlsProps {
   onNext: () => void;
   onPrevious: () => void;
   onDotClick: (index: number) => void;
@@ -10,7 +10,7 @@ interface SliderControlsProps {
   showArrows?: boolean;
 }
 
-export const SliderControls = ({
+export const ImageSliderControls = ({
   onNext,
   onPrevious,
   onDotClick,
@@ -18,7 +18,7 @@ export const SliderControls = ({
   totalSlides,
   showDots = true,
   showArrows = true
-}: SliderControlsProps) => {
+}: ImageSliderControlsProps) => {
   return (
     <>
       {showArrows && totalSlides > 1 && (

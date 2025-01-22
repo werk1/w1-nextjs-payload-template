@@ -1,13 +1,13 @@
 import styles from '@/styles/modules/ImageSlider.module.css';
 
-interface SlideContentProps {
+interface ImageSliderContentProps {
 	slide: {
 		title?: string;
 		description?: string;
 	};
 }
 
-export const SlideContent = ({ slide }: SlideContentProps) => {
+export const ImageSliderContent = ({ slide }: ImageSliderContentProps) => {
 	if (!slide.title && !slide.description) return null;
 
 	return (
