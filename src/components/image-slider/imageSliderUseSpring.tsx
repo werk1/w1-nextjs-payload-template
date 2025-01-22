@@ -2,15 +2,15 @@ import { useSpring, animated } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
 import { useState, useRef, useCallback } from 'react';
 import Image from 'next/image';
-import styles from './styles/ImageSliderUseSpring.module.css';
-import { ImageSliderProps } from './types/typesImageSlider';
-import { getImageProps, clamp } from './utils/utilsImageSlider';
-import { ImageSliderControls } from './components/ImageSliderControl';
-import { useImageSliderAutoplay } from './hooks/useImageSliderAutoplay';
-import { useImageSliderWidth } from './hooks/useImageSliderWidth';
-import { ImageSliderDescription } from './components/ImageSliderDescription';
-import { ImageSliderPropsWithControls } from './types/typesImageSlider';
-import ImageSliderControlUseSpringStyles from './styles/image-slider-controls/ImageSliderControlUseSpring.module.css';
+import styles from './styles/SliderUseSpring.module.css';
+import { getImageProps, clamp } from './utils/utilsSlider';
+import { SliderControls } from './components/SliderControl';
+import { useSliderAutoplay } from './hooks/useSliderAutoplay';
+import { useSliderWidth } from './hooks/useSliderWidth';
+import { SliderDescription } from './components/SliderDescription';
+import { SliderPropsWithControlsAndDescription } from './types/typesImageSlider';
+import SliderControlUseSpringStyles from './styles/slider-controls/SliderControlUseSpring.module.css';
+import SliderDescriptionDefaultStyles from './styles/slider-description/SliderDescriptionDefault.module.css';
 
 export const ImageSliderUseSpring = ({
 	slides,
@@ -19,12 +19,13 @@ export const ImageSliderUseSpring = ({
 	showDots = true,
 	showArrows = false,
 	className = '',
-	controlStyles = ImageSliderControlUseSpringStyles // Default styles
-}: ImageSliderPropsWithControls) => {
+	controlStyles = SliderControlUseSpringStyles,
+	descriptionStyles = SliderDescriptionDefaultStyles
+}: SliderPropsWithControlsAndDescription) => {
 	const [ index, setIndex ] = useState(0);
 	const [ isAutoPlaying, setIsAutoPlaying ] = useState(autoPlay);
 	const sliderRef = useRef<HTMLDivElement>(null);
-	const sliderWidth = useImageSliderWidth(sliderRef as React.RefObject<HTMLElement>);
+	const sliderWidth = useSliderWidth(sliderRef as React.RefObject<HTMLElement>);
 	const AnimatedDiv = animated('div');
 
 	const [ { x }, api ] = useSpring(() => ({
@@ -58,7 +59,7 @@ export const ImageSliderUseSpring = ({
 		[ index, slides.length, api, sliderWidth ]
 	);
 	// Autoplay
-	useImageSliderAutoplay(nextSlide, isAutoPlaying, autoPlayInterval);
+	useSliderAutoplay(nextSlide, isAutoPlaying, autoPlayInterval);
 
 	// Drag and swipe
 	const bind = useGesture(
@@ -114,13 +115,13 @@ export const ImageSliderUseSpring = ({
 								className={styles.image}
 								priority={i === 0}
 							/>
-							<ImageSliderDescription slide={slide} />
+							<SliderDescription slide={slide} descriptionStyles={descriptionStyles} />
 						</div>
 					);
 				})}
 			</AnimatedDiv>
 
-			<ImageSliderControls
+			<SliderControls
 				onNext={nextSlide}
 				onPrevious={previousSlide}
 				onDotClick={(i) => {

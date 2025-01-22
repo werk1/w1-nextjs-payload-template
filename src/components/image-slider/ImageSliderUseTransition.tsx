@@ -2,13 +2,15 @@ import { useTransition, animated } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
 import { useState, useCallback } from 'react';
 import Image from 'next/image';
-import styles from './styles/ImageSliderUseTransition.module.css';
-import { ImageSliderPropsWithControls } from './types/typesImageSlider';
-import { getImageProps, clamp } from './utils/utilsImageSlider';
-import { ImageSliderControls } from './components/ImageSliderControl';
-import { useImageSliderAutoplay } from './hooks/useImageSliderAutoplay';
-import { ImageSliderDescription } from './components/ImageSliderDescription';
-import ImageSliderControlUseTransitionStyles from './styles/image-slider-controls/ImageSliderControlUseTransition.module.css';
+import styles from './styles/SliderUseTransition.module.css';
+import { SliderPropsWithControlsAndDescription } from './types/typesImageSlider';
+import { getImageProps, clamp } from './utils/utilsSlider';
+import { SliderControls } from './components/SliderControl';
+import { useSliderAutoplay } from './hooks/useSliderAutoplay';
+import { SliderDescription } from './components/SliderDescription';
+import SliderControlUseTransitionStyles from './styles/slider-controls/SliderControlUseTransition.module.css';
+import SliderDescriptionDefaultStyles from './styles/slider-description/SliderDescriptionDefault.module.css';
+
 export const ImageSliderUseTransition = ({
 	slides,
 	autoPlay = false,
@@ -16,8 +18,9 @@ export const ImageSliderUseTransition = ({
 	showDots = true,
 	showArrows = false,
 	className = '',
-	controlStyles = ImageSliderControlUseTransitionStyles // Default styles
-}: ImageSliderPropsWithControls) => {
+	controlStyles = SliderControlUseTransitionStyles,
+	descriptionStyles = SliderDescriptionDefaultStyles
+}: SliderPropsWithControlsAndDescription) => {
 	const [ index, setIndex ] = useState(0);
 	const [ direction, setDirection ] = useState(0);
 	const [ isAutoPlaying, setIsAutoPlaying ] = useState(autoPlay);
@@ -40,7 +43,7 @@ export const ImageSliderUseTransition = ({
 	);
 
 	// Autoplay
-	useImageSliderAutoplay(nextSlide, isAutoPlaying, autoPlayInterval);
+	useSliderAutoplay(nextSlide, isAutoPlaying, autoPlayInterval);
 
 	// Transition
 	const transitions = useTransition(index, {
@@ -95,12 +98,12 @@ export const ImageSliderUseTransition = ({
 							className={styles.image}
 							priority={i === 0}
 						/>
-						<ImageSliderDescription slide={slides[i]} />
+						<SliderDescription slide={slides[i]} descriptionStyles={descriptionStyles} />
 					</AnimatedDiv>
 				);
 			})}
 
-			<ImageSliderControls
+			<SliderControls
 				onNext={nextSlide}
 				onPrevious={previousSlide}
 				onDotClick={(i) => {

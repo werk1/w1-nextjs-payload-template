@@ -30,7 +30,7 @@ interface PayloadSlide extends BaseSlide {
 }
 
 // Control styles interface
-export interface ImageSliderControlStyles {
+export interface SliderControlStyles {
   arrow?: string;
   prev?: string;
   next?: string;
@@ -40,7 +40,7 @@ export interface ImageSliderControlStyles {
 }
 
 // Description styles interface
-export interface ImageSliderDescriptionStyles {
+export interface SliderDescriptionStyles {
   descriptionContainer?: string;  // Changed from container
   descriptionTitle?: string;      // Changed from title
   descriptionText?: string;       // Changed from text
@@ -50,7 +50,7 @@ export interface ImageSliderDescriptionStyles {
 export type Slide = LocalSlide | PayloadSlide;
 
 // Base props interface
-export interface ImageSliderProps {
+export interface SliderProps {
   slides: Slide[];
   autoPlay?: boolean;
   autoPlayInterval?: number;
@@ -60,7 +60,8 @@ export interface ImageSliderProps {
 }
 
 // Extended props interface with control styles
-export interface ImageSliderPropsWithControls extends ImageSliderProps {
-  controlStyles?: ImageSliderControlStyles;
+export interface SliderPropsWithControlsAndDescription extends SliderProps {
+  controlStyles?: SliderControlStyles;
+  descriptionStyles?: SliderDescriptionStyles;
 }
 

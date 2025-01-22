@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export const useImageSliderWidth = (sliderRef: React.RefObject<HTMLElement>) => {
+export const useSliderWidth = (sliderRef: React.RefObject<HTMLElement>) => {
   const sliderWidth = useRef(0);
 
   useEffect(() => {
