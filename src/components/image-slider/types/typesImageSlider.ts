@@ -29,14 +29,38 @@ interface PayloadSlide extends BaseSlide {
   image: PayloadImage;
 }
 
+// Control styles interface
+export interface ImageSliderControlStyles {
+  arrow?: string;
+  prev?: string;
+  next?: string;
+  dotsContainer?: string;
+  dot?: string;
+  dotActive?: string;
+}
+
+// Description styles interface
+export interface ImageSliderDescriptionStyles {
+  descriptionContainer?: string;  // Changed from container
+  descriptionTitle?: string;      // Changed from title
+  descriptionText?: string;       // Changed from text
+}
+
 // Combined type
 export type Slide = LocalSlide | PayloadSlide;
 
+// Base props interface
 export interface ImageSliderProps {
   slides: Slide[];
-  autoPlay?: boolean; // Add this prop
+  autoPlay?: boolean;
   autoPlayInterval?: number;
   showDots?: boolean;
   showArrows?: boolean;
   className?: string;
 }
+
+// Extended props interface with control styles
+export interface ImageSliderPropsWithControls extends ImageSliderProps {
+  controlStyles?: ImageSliderControlStyles;
+}
+

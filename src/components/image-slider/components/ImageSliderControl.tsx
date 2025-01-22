@@ -1,4 +1,5 @@
-import styles from '../styles/ImageSliderControl.module.css';
+import defaultStyles from '../styles/image-slider-controls/ImageSliderControlDefault.module.css';
+import { ImageSliderControlStyles } from '../types/typesImageSlider';
 
 interface ImageSliderControlsProps {
   onNext: () => void;
@@ -8,23 +9,25 @@ interface ImageSliderControlsProps {
   totalSlides: number;
   showDots?: boolean;
   showArrows?: boolean;
+  controlStyles?: ImageSliderControlStyles;
 }
 
 export const ImageSliderControls = ({
   onNext,
   onPrevious,
   onDotClick,
-  currentIndex,
+  currentIndex, 
   totalSlides,
   showDots = true,
-  showArrows = true
+  showArrows = true,
+  controlStyles = {} // Default to empty object
 }: ImageSliderControlsProps) => {
   return (
     <>
       {showArrows && totalSlides > 1 && (
         <>
           <button
-            className={`${styles.arrow} ${styles.prev}`}
+            className={`${defaultStyles.arrow} ${defaultStyles.prev} ${controlStyles.arrow || ''} ${controlStyles.prev || ''}`}
             onClick={onPrevious}
             aria-label="Previous slide"
             type="button"
@@ -32,7 +35,7 @@ export const ImageSliderControls = ({
             <span aria-hidden="true">←</span>
           </button>
           <button
-            className={`${styles.arrow} ${styles.next}`}
+            className={`${defaultStyles.arrow} ${defaultStyles.next} ${controlStyles.arrow || ''} ${controlStyles.next || ''}`}
             onClick={onNext}
             aria-label="Next slide"
             type="button"
@@ -43,12 +46,13 @@ export const ImageSliderControls = ({
       )}
 
       {showDots && totalSlides > 1 && (
-        <div className={styles.dotsContainer}>
+        <div className={`${defaultStyles.dotsContainer} ${controlStyles.dotsContainer || ''}`}>
           {Array.from({ length: totalSlides }).map((_, i) => (
             <button
               key={i}
               onClick={() => onDotClick(i)}
-              className={`${styles.dot} ${i === currentIndex ? styles.dotActive : ''}`}
+              className={`${defaultStyles.dot} ${i === currentIndex ? defaultStyles.dotActive : ''} 
+                ${controlStyles.dot || ''} ${i === currentIndex ? controlStyles.dotActive || '' : ''}`}
               aria-label={`Go to slide ${i + 1}`}
               aria-current={i === currentIndex}
             />

@@ -3,20 +3,21 @@ import { useGesture } from '@use-gesture/react';
 import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import styles from './styles/ImageSliderUseTransition.module.css';
-import { ImageSliderProps } from './types/typesImageSlider';
+import { ImageSliderPropsWithControls } from './types/typesImageSlider';
 import { getImageProps, clamp } from './utils/utilsImageSlider';
 import { ImageSliderControls } from './components/ImageSliderControl';
 import { useImageSliderAutoplay } from './hooks/useImageSliderAutoplay';
-import { ImageSliderContent } from './components/ImageSliderContent';
-
+import { ImageSliderDescription } from './components/ImageSliderDescription';
+import ImageSliderControlUseTransitionStyles from './styles/image-slider-controls/ImageSliderControlUseTransition.module.css';
 export const ImageSliderUseTransition = ({
 	slides,
 	autoPlay = false,
 	autoPlayInterval = 5000,
 	showDots = true,
 	showArrows = false,
-	className = ''
-}: ImageSliderProps) => {
+	className = '',
+	controlStyles = ImageSliderControlUseTransitionStyles // Default styles
+}: ImageSliderPropsWithControls) => {
 	const [ index, setIndex ] = useState(0);
 	const [ direction, setDirection ] = useState(0);
 	const [ isAutoPlaying, setIsAutoPlaying ] = useState(autoPlay);
@@ -38,8 +39,10 @@ export const ImageSliderUseTransition = ({
 		[ slides.length ]
 	);
 
+	// Autoplay
 	useImageSliderAutoplay(nextSlide, isAutoPlaying, autoPlayInterval);
 
+	// Transition
 	const transitions = useTransition(index, {
 		from: {
 			opacity: 0,
@@ -92,7 +95,7 @@ export const ImageSliderUseTransition = ({
 							className={styles.image}
 							priority={i === 0}
 						/>
-						<ImageSliderContent slide={slides[i]} />
+						<ImageSliderDescription slide={slides[i]} />
 					</AnimatedDiv>
 				);
 			})}
@@ -108,6 +111,7 @@ export const ImageSliderUseTransition = ({
 				totalSlides={slides.length}
 				showDots={showDots}
 				showArrows={showArrows}
+				controlStyles={controlStyles}
 			/>
 
 			<div className={styles.progress}>

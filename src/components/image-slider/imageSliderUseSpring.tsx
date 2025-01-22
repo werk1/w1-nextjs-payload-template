@@ -8,7 +8,9 @@ import { getImageProps, clamp } from './utils/utilsImageSlider';
 import { ImageSliderControls } from './components/ImageSliderControl';
 import { useImageSliderAutoplay } from './hooks/useImageSliderAutoplay';
 import { useImageSliderWidth } from './hooks/useImageSliderWidth';
-import { ImageSliderContent } from './components/ImageSliderContent';
+import { ImageSliderDescription } from './components/ImageSliderDescription';
+import { ImageSliderPropsWithControls } from './types/typesImageSlider';
+import ImageSliderControlUseSpringStyles from './styles/image-slider-controls/ImageSliderControlUseSpring.module.css';
 
 export const ImageSliderUseSpring = ({
 	slides,
@@ -16,8 +18,9 @@ export const ImageSliderUseSpring = ({
 	autoPlayInterval = 5000,
 	showDots = true,
 	showArrows = false,
-	className = ''
-}: ImageSliderProps) => {
+	className = '',
+	controlStyles = ImageSliderControlUseSpringStyles // Default styles
+}: ImageSliderPropsWithControls) => {
 	const [ index, setIndex ] = useState(0);
 	const [ isAutoPlaying, setIsAutoPlaying ] = useState(autoPlay);
 	const sliderRef = useRef<HTMLDivElement>(null);
@@ -54,9 +57,10 @@ export const ImageSliderUseSpring = ({
 		},
 		[ index, slides.length, api, sliderWidth ]
 	);
-
+	// Autoplay
 	useImageSliderAutoplay(nextSlide, isAutoPlaying, autoPlayInterval);
 
+	// Drag and swipe
 	const bind = useGesture(
 		{
 			onDrag: ({ down, movement: [ mx ], velocity: [ vx ], direction: [ dx ] }) => {
@@ -110,7 +114,7 @@ export const ImageSliderUseSpring = ({
 								className={styles.image}
 								priority={i === 0}
 							/>
-							<ImageSliderContent slide={slide} />
+							<ImageSliderDescription slide={slide} />
 						</div>
 					);
 				})}
@@ -127,6 +131,7 @@ export const ImageSliderUseSpring = ({
 				totalSlides={slides.length}
 				showDots={showDots}
 				showArrows={showArrows}
+				controlStyles={controlStyles}
 			/>
 
 			<div className={styles.progress}>
