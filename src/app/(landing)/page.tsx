@@ -7,14 +7,11 @@ import Header from '@/components/header/Header';
 import Footer from '@/components/footer/Footer';
 import FooterIcons from '@/components/footer/FooterIcons';
 import { useDeviceLayout } from '@/styles/hooks/device-layout/useDeviceLayout';
-import Image from 'next/image';
 import roseImage_1 from './_assets/DSF9873_FB.png'; // Import the image
 import roseImage_2 from './_assets/DSF9810_FB.png'; // Import the image
 import { useEffect, useState } from 'react';
-import { ImageSlider } from '@/components/image-slider/ImageSlider';
 import { ImageSliderUseTransition } from '@/components/image-slider/ImageSliderUseTransition';
-import { autocompleteClasses } from '@mui/material';
-import { ImageSliderReactSpring } from '@/components/image-slider/imageSliderReactSpring';
+import { ImageSliderUseSpring } from '@/components/image-slider/imageSliderUseSpring';
 
 export default function LandingPage() {
 	const [ isLoaded, setIsLoaded ] = useState(false);
@@ -58,15 +55,8 @@ export default function LandingPage() {
 				</h1>
 				<section>
 					<SectionTwo />
-					<ImageSliderReactSpring slides={localSlides} />
+					<ImageSliderUseSpring slides={localSlides} />
 					<ImageSliderUseTransition slides={localSlides} />
-        {/* <ImageSlider 
-          slides={localSlides}
-						// autoPlay={false}
-          // autoPlayInterval={5000}
-          showDots={true}
-          showArrows={false}
-        />					 */}
 				{/* <Image
 						src={roseImage_1} // Use the imported image
 						alt="Featured Image"

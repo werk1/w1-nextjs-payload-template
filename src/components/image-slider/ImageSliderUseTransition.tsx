@@ -1,26 +1,44 @@
 import { useTransition, animated } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
-import { useState } from 'react';
-import Image, { StaticImageData } from 'next/image';
-import styles from './ImageSliderUseTransition.module.css';
+import { useState, useCallback } from 'react';
+import Image from 'next/image';
+import styles from './styles/ImageSliderUseTransition.module.css';
+import { ImageSliderProps } from './types/typesImageSlider';
+import { getImageProps, clamp } from './utils/utilsImageSlider';
+import { SliderControls } from './components/ImageSliderControls';
+import { useSliderAutoplay } from './hooks/useSliderAutoplay';
+import { SlideContent } from './components/ImageSliderContent';
 
-interface Slide {
-	src: string | StaticImageData;
-	alt: string;
-	type?: 'local';
-	width?: number;
-	height?: number;
-}
-
-interface ImageSliderProps {
-	slides: Slide[];
-	width?: number;
-}
-
-export const ImageSliderUseTransition = ({ slides }: ImageSliderProps) => {
+export const ImageSliderUseTransition = ({
+	slides,
+	autoPlay = false,
+	autoPlayInterval = 5000,
+	showDots = true,
+	showArrows = false,
+	className = ''
+}: ImageSliderProps) => {
 	const [ index, setIndex ] = useState(0);
-	const [ direction, setDirection ] = useState(0); // Track slide direction
+	const [ direction, setDirection ] = useState(0);
+	const [ isAutoPlaying, setIsAutoPlaying ] = useState(autoPlay);
 	const AnimatedDiv = animated('div');
+
+	const nextSlide = useCallback(
+		() => {
+			setDirection(1);
+			setIndex((prev) => (prev + 1) % slides.length);
+		},
+		[ slides.length ]
+	);
+
+	const previousSlide = useCallback(
+		() => {
+			setDirection(-1);
+			setIndex((prev) => (prev - 1 + slides.length) % slides.length);
+		},
+		[ slides.length ]
+	);
+
+	useSliderAutoplay(nextSlide, isAutoPlaying, autoPlayInterval);
 
 	const transitions = useTransition(index, {
 		from: {
@@ -57,29 +75,49 @@ export const ImageSliderUseTransition = ({ slides }: ImageSliderProps) => {
 	});
 
 	return (
-		<div className={styles.container}>
-			{transitions((style, i) => (
-				<AnimatedDiv
-					{...bind()}
-					className={styles.slide}
-					style={style} // Spring transitions need inline style
-				>
-					<Image src={slides[i].src} alt={slides[i].alt} fill className={styles.image} priority={i === 0} />
-				</AnimatedDiv>
-			))}
+		<div
+			className={`${styles.container} ${className}`}
+			onMouseEnter={() => setIsAutoPlaying(false)}
+			onMouseLeave={() => setIsAutoPlaying(true)}
+		>
+			{transitions((style, i) => {
+				const imageProps = getImageProps(slides[i]);
 
-			<div className={styles.dotsContainer}>
-				{slides.map((_, i) => (
-					<button
-						key={i}
-						onClick={() => setIndex(i)}
-						className={`${styles.dot} ${i === index ? styles.dotActive : ''}`}
-					/>
-				))}
+				return (
+					<AnimatedDiv {...bind()} className={styles.slide} style={style}>
+						<Image
+							src={imageProps.src}
+							alt={imageProps.alt}
+							fill
+							className={styles.image}
+							priority={i === 0}
+						/>
+						<SlideContent slide={slides[i]} />
+					</AnimatedDiv>
+				);
+			})}
+
+			<SliderControls
+				onNext={nextSlide}
+				onPrevious={previousSlide}
+				onDotClick={(i) => {
+					setDirection(i > index ? 1 : -1);
+					setIndex(i);
+				}}
+				currentIndex={index}
+				totalSlides={slides.length}
+				showDots={showDots}
+				showArrows={showArrows}
+			/>
+
+			<div className={styles.progress}>
+				<div
+					className={styles.progressBar}
+					style={{
+						width: `${(index + 1) / slides.length * 100}%`
+					}}
+				/>
 			</div>
 		</div>
 	);
 };
-
-// Helper function
-const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
