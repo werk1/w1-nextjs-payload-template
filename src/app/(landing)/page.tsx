@@ -12,7 +12,6 @@ import roseImage_2 from './_assets/DSF9810_FB.png'; // Import the image
 import { useEffect, useState } from 'react';
 import { ImageSliderUseTransition } from '@/components/image-slider/ImageSliderUseTransition';
 import { ImageSliderUseSpring } from '@/components/image-slider/imageSliderUseSpring';
-
 //Import styles they override the intermnal Default Styles if needed
 import defaultSliderUseSpringStyles from '@/components/image-slider/styles/SliderUseSpringDefault.module.css';
 import defaultControlUseSpringStyles from '@/components/image-slider/styles/slider-controls/SliderControlUseSpringDefault.module.css';
