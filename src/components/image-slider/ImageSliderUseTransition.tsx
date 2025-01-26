@@ -2,14 +2,16 @@ import { useTransition, animated } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
 import { useState, useCallback } from 'react';
 import Image from 'next/image';
-import styles from './styles/SliderUseTransition.module.css';
 import { SliderPropsWithControlsAndDescription } from './types/typesImageSlider';
 import { getImageProps, clamp } from './utils/utilsSlider';
 import { SliderControls } from './components/SliderControl';
 import { useSliderAutoplay } from './hooks/useSliderAutoplay';
 import { SliderDescription } from './components/SliderDescription';
-import SliderControlUseTransitionStyles from './styles/slider-controls/SliderControlUseTransition.module.css';
-import SliderDescriptionDefaultStyles from './styles/slider-description/SliderDescriptionDefault.module.css';
+
+//Import default styles
+import defaultSliderStyles from './styles/SliderUseTransitionDefault.module.css';
+import defaultControlStyles from './styles/slider-controls/SliderControlUseTransitionDefault.module.css';
+import defaultDescriptionStyles from './styles/slider-description/SliderDescriptionUseTransitionDefault.module.css';
 
 export const ImageSliderUseTransition = ({
 	slides,
@@ -18,8 +20,9 @@ export const ImageSliderUseTransition = ({
 	showDots = true,
 	showArrows = false,
 	className = '',
-	controlStyles = SliderControlUseTransitionStyles,
-	descriptionStyles = SliderDescriptionDefaultStyles
+	controlStyles = defaultControlStyles,
+	descriptionStyles = defaultDescriptionStyles,
+	sliderStyles = defaultSliderStyles
 }: SliderPropsWithControlsAndDescription) => {
 	const [ index, setIndex ] = useState(0);
 	const [ direction, setDirection ] = useState(0);
@@ -82,7 +85,7 @@ export const ImageSliderUseTransition = ({
 
 	return (
 		<div
-			className={`${styles.container} ${className}`}
+			className={`${defaultSliderStyles.container} ${sliderStyles.container || ''} ${className}`}
 			onMouseEnter={() => setIsAutoPlaying(false)}
 			onMouseLeave={() => setIsAutoPlaying(true)}
 		>
@@ -90,12 +93,16 @@ export const ImageSliderUseTransition = ({
 				const imageProps = getImageProps(slides[i]);
 
 				return (
-					<AnimatedDiv {...bind()} className={styles.slide} style={style}>
+					<AnimatedDiv
+						{...bind()}
+						className={`${defaultSliderStyles.slide} ${sliderStyles.slide || ''}`}
+						style={style}
+					>
 						<Image
 							src={imageProps.src}
 							alt={imageProps.alt}
 							fill
-							className={styles.image}
+							className={`${defaultSliderStyles.image} ${sliderStyles.image || ''}`}
 							priority={i === 0}
 						/>
 						<SliderDescription slide={slides[i]} descriptionStyles={descriptionStyles} />
@@ -117,9 +124,9 @@ export const ImageSliderUseTransition = ({
 				controlStyles={controlStyles}
 			/>
 
-			<div className={styles.progress}>
+			<div className={`${defaultSliderStyles.progress} ${sliderStyles.progress || ''}`}>
 				<div
-					className={styles.progressBar}
+					className={`${defaultSliderStyles.progressBar} ${sliderStyles.progressBar || ''}`}
 					style={{
 						width: `${(index + 1) / slides.length * 100}%`
 					}}

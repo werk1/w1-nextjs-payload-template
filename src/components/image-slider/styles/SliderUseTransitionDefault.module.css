@@ -1,0 +1,38 @@
+/* ImageSliderUseTransition.module.css */
+.container {
+  position: relative;
+  overflow: hidden;
+  height: 500px;
+}
+
+.slider {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  /* Allow vertical scrolling */
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.progressBar {
+  height: 100%;
+  background: white;
+  transition: width 0.3s ease-in-out;
+}

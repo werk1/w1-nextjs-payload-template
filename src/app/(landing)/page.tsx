@@ -13,6 +13,14 @@ import { useEffect, useState } from 'react';
 import { ImageSliderUseTransition } from '@/components/image-slider/ImageSliderUseTransition';
 import { ImageSliderUseSpring } from '@/components/image-slider/imageSliderUseSpring';
 
+//Import styles they override the intermnal Default Styles if needed
+import defaultSliderUseSpringStyles from '@/components/image-slider/styles/SliderUseSpringDefault.module.css';
+import defaultControlUseSpringStyles from '@/components/image-slider/styles/slider-controls/SliderControlUseSpringDefault.module.css';
+import defaultDescriptionUseSpringStyles from '@/components/image-slider/styles/slider-description/SliderDescriptionUseSpringDefault.module.css';
+import defaultSliderUseTransitionStyles from '@/components/image-slider/styles/SliderUseTransitionDefault.module.css';
+import defaultControlUseTransitionStyles from '@/components/image-slider/styles/slider-controls/SliderControlUseTransitionDefault.module.css';
+import defaultDescriptionUseTransitionStyles from '@/components/image-slider/styles/slider-description/SliderDescriptionUseTransitionDefault.module.css';
+
 export default function LandingPage() {
 	const [ isLoaded, setIsLoaded ] = useState(false);
 
@@ -55,8 +63,16 @@ export default function LandingPage() {
 				</h1>
 				<section>
 					<SectionTwo />
-					<ImageSliderUseSpring slides={localSlides} />
-					<ImageSliderUseTransition slides={localSlides} />
+					<ImageSliderUseSpring slides={localSlides}
+						sliderStyles={defaultSliderUseSpringStyles}
+						controlStyles={defaultControlUseSpringStyles}
+						descriptionStyles={defaultDescriptionUseSpringStyles}
+					/>
+					<ImageSliderUseTransition slides={localSlides} 
+						sliderStyles={defaultSliderUseTransitionStyles}
+						controlStyles={defaultControlUseTransitionStyles}
+						descriptionStyles={defaultDescriptionUseTransitionStyles}
+					/>
 				{/* <Image
 						src={roseImage_1} // Use the imported image
 						alt="Featured Image"

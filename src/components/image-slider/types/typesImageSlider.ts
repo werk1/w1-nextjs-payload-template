@@ -28,6 +28,28 @@ interface PayloadSlide extends BaseSlide {
   type: 'payload';
   image: PayloadImage;
 }
+// Combined type
+export type Slide = LocalSlide | PayloadSlide;
+
+// Base props interface
+export interface SliderProps {
+  slides: Slide[];
+  autoPlay?: boolean;
+  autoPlayInterval?: number;
+  showDots?: boolean;
+  showArrows?: boolean;
+  className?: string;
+}
+
+//STYLES
+export interface SliderStyles {
+  container?: string;
+  slider?: string;
+  slide?: string;
+  image?: string;
+  progress?: string;
+  progressBar?: string;
+}
 
 // Control styles interface
 export interface SliderControlStyles {
@@ -46,21 +68,9 @@ export interface SliderDescriptionStyles {
   descriptionText?: string;       // Changed from text
 }
 
-// Combined type
-export type Slide = LocalSlide | PayloadSlide;
-
-// Base props interface
-export interface SliderProps {
-  slides: Slide[];
-  autoPlay?: boolean;
-  autoPlayInterval?: number;
-  showDots?: boolean;
-  showArrows?: boolean;
-  className?: string;
-}
-
 // Extended props interface with control styles
 export interface SliderPropsWithControlsAndDescription extends SliderProps {
+  sliderStyles?: SliderStyles;
   controlStyles?: SliderControlStyles;
   descriptionStyles?: SliderDescriptionStyles;
 }

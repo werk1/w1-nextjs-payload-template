@@ -2,15 +2,17 @@ import { useSpring, animated } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
 import { useState, useRef, useCallback } from 'react';
 import Image from 'next/image';
-import styles from './styles/SliderUseSpring.module.css';
 import { getImageProps, clamp } from './utils/utilsSlider';
 import { SliderControls } from './components/SliderControl';
 import { useSliderAutoplay } from './hooks/useSliderAutoplay';
 import { useSliderWidth } from './hooks/useSliderWidth';
 import { SliderDescription } from './components/SliderDescription';
 import { SliderPropsWithControlsAndDescription } from './types/typesImageSlider';
-import SliderControlUseSpringStyles from './styles/slider-controls/SliderControlUseSpring.module.css';
-import SliderDescriptionDefaultStyles from './styles/slider-description/SliderDescriptionDefault.module.css';
+
+//Import default styles
+import defaultSliderStyles from './styles/SliderUseSpringDefault.module.css';
+import defaultControlStyles from './styles/slider-controls/SliderControlUseSpringDefault.module.css';
+import defaultDescriptiontStyles from './styles/slider-description/SliderDescriptionUseSpringDefault.module.css';
 
 export const ImageSliderUseSpring = ({
 	slides,
@@ -19,8 +21,10 @@ export const ImageSliderUseSpring = ({
 	showDots = true,
 	showArrows = false,
 	className = '',
-	controlStyles = SliderControlUseSpringStyles,
-	descriptionStyles = SliderDescriptionDefaultStyles
+	//use default styles as fallback
+	controlStyles = defaultControlStyles,
+	descriptionStyles = defaultDescriptiontStyles,
+	sliderStyles = defaultSliderStyles
 }: SliderPropsWithControlsAndDescription) => {
 	const [ index, setIndex ] = useState(0);
 	const [ isAutoPlaying, setIsAutoPlaying ] = useState(autoPlay);
@@ -98,21 +102,25 @@ export const ImageSliderUseSpring = ({
 
 	return (
 		<div
-			className={`${styles.container} ${className}`}
+			className={`${defaultSliderStyles.container} ${sliderStyles.container || ''} ${className}`}
 			ref={sliderRef}
 			onMouseEnter={() => setIsAutoPlaying(false)}
 			onMouseLeave={() => setIsAutoPlaying(true)}
 		>
-			<AnimatedDiv {...bind()} className={styles.slider} style={{ x }}>
+			<AnimatedDiv
+				{...bind()}
+				className={`${defaultSliderStyles.slider} ${sliderStyles.slider || ''}`}
+				style={{ x }}
+			>
 				{slides.map((slide, i) => {
 					const imageProps = getImageProps(slide);
 					return (
-						<div key={i} className={styles.slide}>
+						<div key={i} className={`${defaultSliderStyles.slide} ${sliderStyles.slide || ''}`}>
 							<Image
 								src={imageProps.src}
 								alt={imageProps.alt}
 								fill
-								className={styles.image}
+								className={`${defaultSliderStyles.image} ${sliderStyles.image || ''}`}
 								priority={i === 0}
 							/>
 							<SliderDescription slide={slide} descriptionStyles={descriptionStyles} />
@@ -135,9 +143,9 @@ export const ImageSliderUseSpring = ({
 				controlStyles={controlStyles}
 			/>
 
-			<div className={styles.progress}>
+			<div className={`${defaultSliderStyles.progress} ${sliderStyles.progress || ''}`}>
 				<div
-					className={styles.progressBar}
+					className={`${defaultSliderStyles.progressBar} ${sliderStyles.progressBar || ''}`}
 					style={{
 						width: `${(index + 1) / slides.length * 100}%`
 					}}
