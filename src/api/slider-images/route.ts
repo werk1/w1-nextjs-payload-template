@@ -1,21 +1,23 @@
-import payload from 'payload'
-import { Slide } from '@/components/image-slider/types/typesImageSlider'
+import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
+import { Slide } from '@/components/image-slider/types/typesImageSlider'
 
-export const GET = async () => {
+export const GET = async (req: Request) => {
   try {
-    await payload.init({
+    const payload = await getPayload({
       config: configPromise,
     })
 
-    const media = await payload.find({
+    const mediaResponse = await payload.find({
       collection: 'media',
       limit: 10,
-      // Add public access
-      overrideAccess: true,
+      depth: 0,
+      overrideAccess: true, // Use this instead of local
     })
 
-    const slides: Slide[] = media.docs.map((doc: any): Slide => ({
+    console.log('Media response:', mediaResponse)
+
+    const slides: Slide[] = mediaResponse.docs.map((doc: any) => ({
       type: 'payload',
       image: {
         id: String(doc.id),
@@ -30,7 +32,7 @@ export const GET = async () => {
 
     return Response.json(slides)
   } catch (error) {
-    console.error('Error fetching slider images:', error)
+    console.error('Error in slider-images route:', error)
     return Response.json({ error: 'Failed to fetch slider images' }, { status: 500 })
   }
 }

@@ -1,9 +1,9 @@
-// storage-adapter-import-placeholder
+import { buildConfig } from 'payload'
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import path from 'path'
-import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
@@ -31,9 +31,12 @@ export default buildConfig({
       url: process.env.DATABASE_URI || '',
     },
   }),
+  email: nodemailerAdapter({
+    defaultFromAddress: 'dev@example.com',
+    defaultFromName: 'Your App Name',
+  }),
   sharp,
   plugins: [
     payloadCloudPlugin(),
-    // storage-adapter-placeholder
   ],
 })
