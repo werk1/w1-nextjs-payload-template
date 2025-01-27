@@ -1,6 +1,6 @@
 import { useTransition, animated } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { SliderPropsWithControlsAndDescription } from './types/typesImageSlider';
 import { getImageProps, clamp } from './utils/utilsSlider';
@@ -27,6 +27,7 @@ export const ImageSliderUseTransition = ({
 	const [ index, setIndex ] = useState(0);
 	const [ direction, setDirection ] = useState(0);
 	const [ isAutoPlaying, setIsAutoPlaying ] = useState(autoPlay);
+	const initialAutoPlay = useRef(autoPlay);
 	const AnimatedDiv = animated('div');
 
 	const nextSlide = useCallback(
@@ -86,8 +87,8 @@ export const ImageSliderUseTransition = ({
 	return (
 		<div
 			className={`${defaultSliderStyles.container} ${sliderStyles.container || ''} ${className}`}
-			onMouseEnter={() => setIsAutoPlaying(false)}
-			onMouseLeave={() => setIsAutoPlaying(true)}
+			onMouseEnter={() => initialAutoPlay.current && setIsAutoPlaying(false)}
+			onMouseLeave={() => initialAutoPlay.current && setIsAutoPlaying(true)}
 		>
 			{transitions((style, i) => {
 				const imageProps = getImageProps(slides[i]);

@@ -1,0 +1,164 @@
+.navBase {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 80%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin-right: 20px;
+
+    left: 0;
+    right: 0;
+}
+
+.navBase ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Hamburger Icon*/
+.navMenuIcon {
+    color: var(--col_menu_icons);
+    font-size: 180%;
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+}
+
+.popupBase {
+    position: absolute;
+    top: var(--measure_header_height_mobile_portrait);
+    left: 0;
+    right: 0;
+    background-color: var(--col_background_dark);
+    overflow: hidden;
+}
+
+.popupContentContainer {
+    padding-left: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.popupContentContainer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.popupContainerCloseCutton {
+    align-self: flex-start;
+    background-color: transparent;
+    border: none;
+    color: var(--col_menu_icons);
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0.5rem 0rem 0.5rem 0rem;
+}
+
+
+
+/* STYLE AGENT
+ * The Style Agent is a utility that generates CSS class names for different components
+ * of the navigation menu. It ensures consistent naming across different device types
+ * (desktop, phone-portrait, phone-landscape) by appending the device type to each class name.
+ *
+ * The Style Agent provides the following classes:
+ * - navlink_main_container: Styles for the main navigation container
+ * - navlink_main_item: Styles for main navigation links
+ * - navlink_main_navlink_sub_item: Styles for main navigation links that have submenus
+ * - navlink_main_navlink_sub_icon: Styles for the submenu indicator icon
+ * - navlink_sub_container: Styles for the submenu container when it's closed
+ * - navlink_sub_container_open: Styles for the submenu container when it's open
+ * - navlink_sub_item: Styles for individual items within the submenu
+ *
+ * These classes are used in combination with the device-specific suffix (e.g., _desktop_sm)
+ * to create the full class names used in the CSS below.
+ *
+ * The Style Agent helps maintain consistency and makes it easier to manage styles
+ * across different device types and components of the navigation menu.
+ * It is defined in the StyleAgent.ts file and imported where needed.
+ *
+ * Note: In this file, we're using the '_desktop_sm' suffix, which stands for desktop small.
+ * This is specific to the DesktopPopup component and its associated styles.
+ */
+
+.navlinkMainItemPhonePortrait {
+    font-family: var(--fontGtAmericaStandardThin);
+    font-size: 120%;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+.navlinkMainSubItemPhonePortrait {
+    font-family: var(--fontGtAmericaStandardThin);
+    font-size: 120%;
+    text-decoration: none;
+    color: rgb(175, 175, 175);
+    padding: 10px 20px;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+}
+
+.navlinkMainItemActivePhonePortrait {
+    font-family: var(--fontGtAmericaStandardBold);
+    font-size: 120%;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: rgb(175, 175, 175);
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+.navlinkSubItemActivePhonePortrait {
+    font-family: var(--fontGtAmericaStandardBold);
+    font-size: 120%;
+    text-decoration: none;
+    color: rgb(175, 175, 175);
+    padding: 10px 20px;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+}
+
+.navlinkMainSubIconPhonePortrait {
+    color: var(--col_menu_icons);
+    font-size: 60%;
+    margin-left: 5px;
+}
+
+/* Styles for the submenu containers within the desktop popup */
+/* The .popup-container_desktop_sm prefix ensures these styles only apply to the desktop popup navigation */
+/* This approach allows for component-specific styling and prevents conflicts with other navigation components */
+
+.navlinkAnimatedSubContainerPhonePortrait {
+    max-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--col_background_dark);
+}
+
+.navlinkSubItemPhonePortrait {
+    font-size: 100%;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    display: flex;
+    width: 100%;
+    padding: 0 0 20px 40px;
+    margin: 0;
+}

@@ -10,6 +10,8 @@ import { useDeviceLayout } from '@/styles/hooks/device-layout/useDeviceLayout';
 import roseImage_1 from './_assets/DSF9873_FB.png'; // Import the image
 import roseImage_2 from './_assets/DSF9810_FB.png'; // Import the image
 import { useEffect, useState } from 'react';
+import { Slide } from '@/components/image-slider/types/typesImageSlider';
+
 import { ImageSliderUseTransition } from '@/components/image-slider/ImageSliderUseTransition';
 import { ImageSliderUseSpring } from '@/components/image-slider/imageSliderUseSpring';
 //Import styles they override the intermnal Default Styles if needed
@@ -19,20 +21,10 @@ import defaultDescriptionUseSpringStyles from '@/components/image-slider/styles/
 import defaultSliderUseTransitionStyles from '@/components/image-slider/styles/SliderUseTransitionDefault.module.css';
 import defaultControlUseTransitionStyles from '@/components/image-slider/styles/slider-controls/SliderControlUseTransitionDefault.module.css';
 import defaultDescriptionUseTransitionStyles from '@/components/image-slider/styles/slider-description/SliderDescriptionUseTransitionDefault.module.css';
+import Navigation from '@/components/navigation/Navigation';
+
 
 export default function LandingPage() {
-	const [ isLoaded, setIsLoaded ] = useState(false);
-
-	const { headerClass, footerClass, deviceState } = useDeviceLayout();
-
-	useEffect(() => {
-		document.body.classList.add('loaded');
-		setIsLoaded(true);
-	}, []);
-
-	if (!isLoaded) {
-		return <div className={styles.loadingScreen}>Loading...</div>;
-	}
 
 	const localSlides = [
   {
@@ -51,23 +43,54 @@ export default function LandingPage() {
   }
 	];
 
+	const [slides, setSlides] = useState<Slide[]>(localSlides);
+	const [ isLoaded, setIsLoaded ] = useState(false);
+	const { headerClass, footerClass, deviceState } = useDeviceLayout();
+
+  // Add effect to fetch Payload slides
+  useEffect(() => {
+    const fetchSlides = async () => {
+      try {
+        const response = await fetch('/api/slider-images');
+        const data = await response.json();
+        if (data.length > 0) {
+          setSlides(data); // Use Payload slides if available
+        }
+      } catch (error) {
+        console.error('Error fetching slides:', error);
+        // Keep using localSlides on error (already set in initial state)
+      }
+    };
+
+    fetchSlides();
+    document.body.classList.add('loaded');
+    setIsLoaded(true);
+  }, []);
+
+  if (!isLoaded) {
+    return <div className={styles.loadingScreen}>Loading...</div>;
+  }
+
+
+
 	return (
 		<DeviceLayout>
-			<Header headerClass={headerClass}>
+			{/* <Header headerClass={headerClass}>
 				<h1 className={stylesTypography.headerTitle}>now!</h1>
-			</Header>
+				<Navigation />
+			</Header> */}
 			<div className={styles.container} style={{ marginTop: 140 }}>
 				<h1 className={stylesTypography.mainTitle}>
 					Welcome <br /> to Your <br /> new App
 				</h1>
 				<section>
 					<SectionTwo />
-					<ImageSliderUseSpring slides={localSlides}
+					<ImageSliderUseSpring slides={slides}
 						sliderStyles={defaultSliderUseSpringStyles}
 						controlStyles={defaultControlUseSpringStyles}
 						descriptionStyles={defaultDescriptionUseSpringStyles}
 					/>
-					<ImageSliderUseTransition slides={localSlides} 
+					<ImageSliderUseTransition slides={slides} 
 						sliderStyles={defaultSliderUseTransitionStyles}
 						controlStyles={defaultControlUseTransitionStyles}
 						descriptionStyles={defaultDescriptionUseTransitionStyles}

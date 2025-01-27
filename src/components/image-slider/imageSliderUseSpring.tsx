@@ -28,6 +28,7 @@ export const ImageSliderUseSpring = ({
 }: SliderPropsWithControlsAndDescription) => {
 	const [ index, setIndex ] = useState(0);
 	const [ isAutoPlaying, setIsAutoPlaying ] = useState(autoPlay);
+	const initialAutoPlay = useRef(autoPlay);
 	const sliderRef = useRef<HTMLDivElement>(null);
 	const sliderWidth = useSliderWidth(sliderRef as React.RefObject<HTMLElement>);
 	const AnimatedDiv = animated('div');
@@ -104,8 +105,8 @@ export const ImageSliderUseSpring = ({
 		<div
 			className={`${defaultSliderStyles.container} ${sliderStyles.container || ''} ${className}`}
 			ref={sliderRef}
-			onMouseEnter={() => setIsAutoPlaying(false)}
-			onMouseLeave={() => setIsAutoPlaying(true)}
+			onMouseEnter={() => initialAutoPlay.current && setIsAutoPlaying(false)}
+			onMouseLeave={() => initialAutoPlay.current && setIsAutoPlaying(true)}
 		>
 			<AnimatedDiv
 				{...bind()}

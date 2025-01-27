@@ -16,7 +16,7 @@ export default function Header({ headerClass, children }: HeaderProps) {
 
 	const animated_top_style = useSpring({
 		top: isScrollingDown ? -HEADER_HEIGHT * 1.2 : 0,
-		// height: isScrollingDown ? 0 : HEADER_HEIGHT,
+		height: isScrollingDown ? 0 : HEADER_HEIGHT,
 		opacity: !isScrollingDown ? 0.7 : 0,
 		config: {
 			mass: 4,

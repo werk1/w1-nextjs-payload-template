@@ -1,13 +1,11 @@
 'use client';
 
-import styles from '@/styles/modules/Layout.module.css';
 import stylesTypography from '@/styles/modules/Typography.module.css';
-import { useBoundStore } from '@/stores/boundStore';
+import { useScrollDirection } from '@/stores/scroll-direction';
 
 export function SectionTwo() {
-	const contentIsScrollingDown = useBoundStore((state) => state.scrollDirection.isScrollingDown);
-
-	return contentIsScrollingDown ? (
+	const { isScrollingDown } = useScrollDirection(0.33, 0.33, 'time-sensitive');
+	return isScrollingDown ? (
 		<h2 className={stylesTypography.mainTitle}>
 			Beam <br />me up!
 		</h2>

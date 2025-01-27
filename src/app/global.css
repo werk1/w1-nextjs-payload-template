@@ -36,10 +36,9 @@ body {
 
     /* Typography */
     --typo_body: var(--fontGtAmericaStandardRegular);
-    --typo_body-bold: var(--fontGtAmericaStandardBold);
-    --typo_body-thin: var(--fontGtAmericaStandardThin);
+    --typo_body_bold: var(--fontGtAmericaStandardBold);
+    --typo_body_thin: var(--fontGtAmericaStandardThin);
     --typo_heading: var(--fontGtAmericaStandardBlack);
-    --typo_heading-bold: var(--fontGtAmericaStandardBold);
 
     /* paragraphs */
     --par_copy: var(--typo_body), 16px, 1.5;
