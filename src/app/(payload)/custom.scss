@@ -1,0 +1,35 @@
+/* Style all buttons in the admin panel */
+.btn {
+  color: black !important;
+  // background-color: white !important;
+  // border: 1px solid black !important;
+  // padding: 8px 16px !important;
+  // border-radius: 4px !important;
+  // transition: all 0.2s ease !important;
+}
+
+/* Style primary buttons (like Save) */
+.btn--style-primary {
+  background-color: #333 !important;
+  color: white !important;
+  border: 2px solid #333 !important;
+}
+
+/* Style hover states */
+.btn--style-primary:hover {
+  background-color: white !important;
+  color: #333 !important;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .btn--style-primary {
+    background-color: #333 !important;
+    color: white !important;
+    border: 2px solid #333 !important;
+    padding: 10px 20px !important;
+    margin: 10px 0 !important;
+    width: auto !important;
+    display: inline-block !important;
+  }
+}
