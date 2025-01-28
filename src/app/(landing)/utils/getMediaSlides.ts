@@ -19,9 +19,9 @@ export async function getMediaSlides(): Promise<Slide[]> {
     image: {
       id: String(doc.id),
       url: doc.url || '',
-      filename: doc.filename || '',
+      fileName: doc.filename || '',
       mimeType: doc.mimeType || '',
-      filesize: doc.filesize || 0,
+      fileSize: doc.filesize || 0,
       alt: doc.alt,
       width: doc.width || 0,
       height: doc.height || 0,
@@ -29,3 +29,4 @@ export async function getMediaSlides(): Promise<Slide[]> {
     title: doc.title || undefined,
     description: doc.description || undefined,
   }))
+}

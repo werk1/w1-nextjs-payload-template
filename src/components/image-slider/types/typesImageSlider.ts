@@ -19,6 +19,9 @@ interface LocalSlide extends BaseSlide {
 interface PayloadImage {
   id: string;
   url: string;
+  fileName?: string;
+  mimeType?: string;
+  fileSize?: number;
   alt: string;
   width: number;
   height: number;
@@ -28,6 +31,7 @@ interface PayloadSlide extends BaseSlide {
   type: 'payload';
   image: PayloadImage;
 }
+
 // Combined type
 export type Slide = LocalSlide | PayloadSlide;
 
@@ -63,9 +67,9 @@ export interface SliderControlStyles {
 
 // Description styles interface
 export interface SliderDescriptionStyles {
-  descriptionContainer?: string;  // Changed from container
-  descriptionTitle?: string;      // Changed from title
-  descriptionText?: string;       // Changed from text
+  descriptionContainer?: string;
+  descriptionTitle?: string;
+  descriptionText?: string;
 }
 
 // Extended props interface with control styles
@@ -74,4 +78,3 @@ export interface SliderPropsWithControlsAndDescription extends SliderProps {
   controlStyles?: SliderControlStyles;
   descriptionStyles?: SliderDescriptionStyles;
 }
-

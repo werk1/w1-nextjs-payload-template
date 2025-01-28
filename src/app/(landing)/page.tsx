@@ -49,8 +49,8 @@ export default function LandingPage() {
     async function fetchSlides() {
       try {
         const result = await getSlides();
-        if ('slides' in result) {
-          setSlides(result.slides);
+        if ('slides' in result && result.slides) {
+          setSlides([...result.slides]);
         }
       } catch (error) {
         console.error('Error fetching slides:', error);
@@ -93,7 +93,7 @@ export default function LandingPage() {
             <li className={stylesTypography.listItemCustom}>Custom Font Integration</li>
           </ul>
           <h2 className={styles.title}>
-            You don't <br />know!
+            You don&apos;t <br />know!
           </h2>
         </section>
       </div>
