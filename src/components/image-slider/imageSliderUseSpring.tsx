@@ -96,9 +96,9 @@ export const ImageSliderUseSpring = ({
 			drag: {
 				axis: 'x',
 				filterTaps: true,
-				rubberband: true
-			},
-			touchAction: 'pan-y'
+				rubberband: true,
+				touchAction: 'pan-y'
+			}
 		}
 	);
 
