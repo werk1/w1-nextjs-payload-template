@@ -2,24 +2,40 @@
 .container {
   position: relative;
   overflow: hidden;
+  width: 100%;
   height: 500px;
+  touch-action: pan-y; /* Allow vertical scrolling */
 }
 
 .slider {
-  display: flex;
+  position: relative;
   width: 100%;
   height: 100%;
-  /* Allow vertical scrolling */
+  touch-action: pan-y; /* Allow vertical scrolling */
 }
 
 .slide {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide.active {
+  opacity: 1;
 }
 
 .image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .progress {

@@ -17,7 +17,7 @@ import defaultDescriptionUseTransitionStyles from '@/components/image-slider/sty
 import Navigation from '@/components/navigation/Navigation';
 import { Slide } from '@/components/image-slider/types/typesImageSlider';
 import { useDeviceLayout } from '@/styles/hooks/device-layout/useDeviceLayout';
-import { getSlides } from './actions/getSlides';
+import { getSlides } from '../../actions/getSlides';
 import Footer from '@/components/footer/Footer';
 import FooterIcons from '@/components/footer/FooterIcons';
 
