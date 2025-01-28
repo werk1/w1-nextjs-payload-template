@@ -1,6 +1,6 @@
 import { useSpring, animated } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
-import { useState, useRef, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { getImageProps, clamp } from './utils/utilsSlider';
 import { SliderControls } from './components/SliderControl';
@@ -63,6 +63,7 @@ export const ImageSliderUseSpring = ({
 		},
 		[ index, slides.length, api, sliderWidth ]
 	);
+
 	// Autoplay
 	useSliderAutoplay(nextSlide, isAutoPlaying, autoPlayInterval);
 
