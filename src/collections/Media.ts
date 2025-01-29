@@ -13,12 +13,13 @@ export const Media: CollectionConfig = {
       {
         name: 'thumbnail',
         width: 400,
-        height: 300,
+        height: undefined,
+        position: 'centre',
       },
       {
         name: 'slider',
         width: 1920,
-        height: 1080,
+        height: undefined,
         position: 'centre',
       },
     ],

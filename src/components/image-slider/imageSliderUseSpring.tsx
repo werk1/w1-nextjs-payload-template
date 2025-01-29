@@ -121,7 +121,9 @@ export const ImageSliderUseSpring = ({
 							<Image
 								src={imageProps.src}
 								alt={imageProps.alt}
-								fill
+								fill={true}
+								sizes="100vw"
+								quality={100}
 								className={`${defaultSliderStyles.image} ${sliderStyles.image || ''}`}
 								priority={i === 0}
 							/>
