@@ -25,6 +25,17 @@ export const Media: CollectionConfig = {
   },
   fields: [
     {
+      name: 'usecase',
+      type: 'select',
+      required: true,
+      options: [
+        { label: 'Top Slider', value: 'slider-top' },
+        { label: 'Bottom Slider', value: 'slider-bottom' },
+        { label: 'General', value: 'general' },
+      ],
+      defaultValue: 'general',
+    },
+    {
       name: 'alt',
       type: 'text',
       required: true,

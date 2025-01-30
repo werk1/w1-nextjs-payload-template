@@ -4,17 +4,22 @@ import { getMediaSlides } from '../utils/getMediaSlides';
 import { Slide } from '@/components/image-slider/types/typesImageSlider';
 
 export type SlidesResponse = {
-  slides: Slide[];
+  topSlides: Slide[];
+  bottomSlides: Slide[];
   error?: never;
 } | {
-  slides?: never;
+  topSlides?: never;
+  bottomSlides?: never;
   error: string;
 };
 
 export async function getSlides(): Promise<SlidesResponse> {
   try {
-    const slides = await getMediaSlides();
-    return { slides };
+    const [topSlides, bottomSlides] = await Promise.all([
+      getMediaSlides('slider-top'),
+      getMediaSlides('slider-bottom'),
+    ]);
+    return { topSlides, bottomSlides };
   } catch (error) {
     console.error('Error fetching slides:', error);
     return { error: 'Failed to fetch slides' };

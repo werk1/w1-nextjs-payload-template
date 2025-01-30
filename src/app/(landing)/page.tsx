@@ -21,37 +21,49 @@ import { getSlides } from '../../actions/getSlides';
 import Footer from '@/components/footer/Footer';
 import FooterIcons from '@/components/footer/FooterIcons';
 
-function SliderComponent({ slides }: { slides: Slide[] }) {
+function SliderComponent({ topSlides = [], bottomSlides = [] }: { topSlides?: Slide[], bottomSlides?: Slide[] }) {
+  if (!topSlides?.length && !bottomSlides?.length) {
+    return null;
+  }
+
   return (
     <>
-      <ImageSliderUseSpring 
-        slides={slides}
-        sliderStyles={defaultSliderUseSpringStyles}
-        controlStyles={defaultControlUseSpringStyles}
-        descriptionStyles={defaultDescriptionUseSpringStyles}
-      />
-      <ImageSliderUseTransition 
-        slides={slides}
-        sliderStyles={defaultSliderUseTransitionStyles}
-        controlStyles={defaultControlUseTransitionStyles}
-        descriptionStyles={defaultDescriptionUseTransitionStyles}
-      />
+      {topSlides?.length > 0 && (
+        <ImageSliderUseSpring 
+          slides={topSlides}
+          sliderStyles={defaultSliderUseSpringStyles}
+          controlStyles={defaultControlUseSpringStyles}
+          descriptionStyles={defaultDescriptionUseSpringStyles}
+        />
+      )}
+      {bottomSlides?.length > 0 && (
+        <ImageSliderUseTransition 
+          slides={bottomSlides}
+          sliderStyles={defaultSliderUseTransitionStyles}
+          controlStyles={defaultControlUseTransitionStyles}
+          descriptionStyles={defaultDescriptionUseTransitionStyles}
+        />
+      )}
     </>
   );
 }
 
 export default function LandingPage() {
-  const [slides, setSlides] = useState<Slide[]>([]);
+  const [topSlides, setTopSlides] = useState<Slide[]>([]);
+  const [bottomSlides, setBottomSlides] = useState<Slide[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { headerClass, footerClass, deviceState } = useDeviceLayout();
 
   useEffect(() => {
     async function fetchSlides() {
       try {
-        const result = await getSlides();
-        if ('slides' in result && result.slides) {
-          setSlides([...result.slides]);
+        const response = await getSlides();
+        if ('error' in response) {
+          console.error(response.error);
+          return;
         }
+        setTopSlides(response.topSlides);
+        setBottomSlides(response.bottomSlides);
       } catch (error) {
         console.error('Error fetching slides:', error);
       } finally {
@@ -77,8 +89,8 @@ export default function LandingPage() {
           Welcome <br /> to Your <br /> new App
         </h1>
         <section>
+          <SliderComponent topSlides={topSlides} bottomSlides={bottomSlides} />
           <SectionTwo />
-          <SliderComponent slides={slides} />
           <h2 className={styles.title}>
             Some things <br />about
           </h2>
