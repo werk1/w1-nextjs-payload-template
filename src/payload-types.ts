@@ -80,6 +80,7 @@ export interface User {
  */
 export interface Media {
   id: number;
+  usecase: 'slider-top' | 'slider-bottom' | 'general';
   alt: string;
   title?: string | null;
   description?: string | null;
@@ -190,6 +191,7 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
+  usecase?: T;
   alt?: T;
   title?: T;
   description?: T;
