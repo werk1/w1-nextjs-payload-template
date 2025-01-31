@@ -13,6 +13,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'text-content': TextContent;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -21,6 +22,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'text-content': TextContentSelect<false> | TextContentSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -80,7 +82,7 @@ export interface User {
  */
 export interface Media {
   id: number;
-  usecase: 'slider-top' | 'slider-bottom' | 'general';
+  usecase?: ('slider-top' | 'slider-bottom' | 'general') | null;
   alt: string;
   title?: string | null;
   description?: string | null;
@@ -116,6 +118,34 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "text-content".
+ */
+export interface TextContent {
+  id: number;
+  identifier: string;
+  blocks?:
+    | (
+        | {
+            text: string;
+            level?: ('h1' | 'h2' | 'h3') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'title';
+          }
+        | {
+            content: string;
+            variant?: ('standard' | 'highlight' | 'small') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'textBody';
+          }
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -128,6 +158,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'text-content';
+        value: number | TextContent;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -230,6 +264,35 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "text-content_select".
+ */
+export interface TextContentSelect<T extends boolean = true> {
+  identifier?: T;
+  blocks?:
+    | T
+    | {
+        title?:
+          | T
+          | {
+              text?: T;
+              level?: T;
+              id?: T;
+              blockName?: T;
+            };
+        textBody?:
+          | T
+          | {
+              content?: T;
+              variant?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

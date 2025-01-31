@@ -21,6 +21,11 @@ import { getSlides } from '../../actions/getSlides';
 import Footer from '@/components/footer/Footer';
 import FooterIcons from '@/components/footer/FooterIcons';
 import { LoadingSpinner } from '@/components/loading/LoadingSpinner';
+import { BlockRenderer } from '@/components/text-content/block-renderer/BlockRenderer'
+import { Block } from '@/components/text-content/block-renderer/types/blockRendererTypes';
+import { getTextContent } from '@/actions/getTextContent'
+
+
 
 function SliderComponent({ topSlides = [], bottomSlides = [] }: { topSlides?: Slide[], bottomSlides?: Slide[] }) {
   if (!topSlides?.length && !bottomSlides?.length) {
@@ -30,7 +35,7 @@ function SliderComponent({ topSlides = [], bottomSlides = [] }: { topSlides?: Sl
   return (
     <>
       {topSlides?.length > 0 && (
-        <ImageSliderUseSpring 
+        <ImageSliderUseSpring
           slides={topSlides}
           sliderStyles={defaultSliderUseSpringStyles}
           controlStyles={defaultControlUseSpringStyles}
@@ -38,7 +43,7 @@ function SliderComponent({ topSlides = [], bottomSlides = [] }: { topSlides?: Sl
         />
       )}
       {bottomSlides?.length > 0 && (
-        <ImageSliderUseTransition 
+        <ImageSliderUseTransition
           slides={bottomSlides}
           sliderStyles={defaultSliderUseTransitionStyles}
           controlStyles={defaultControlUseTransitionStyles}
@@ -49,35 +54,48 @@ function SliderComponent({ topSlides = [], bottomSlides = [] }: { topSlides?: Sl
   );
 }
 
+
 export default function LandingPage() {
-  const [topSlides, setTopSlides] = useState<Slide[]>([]);
-  const [bottomSlides, setBottomSlides] = useState<Slide[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const { headerClass, footerClass, deviceState } = useDeviceLayout();
+  const [topSlides, setTopSlides] = useState<Slide[]>([])
+  const [bottomSlides, setBottomSlides] = useState<Slide[]>([])
+  const [blockContent, setBlockContent] = useState<Block[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const { headerClass, footerClass, deviceState } = useDeviceLayout()
 
   useEffect(() => {
-    async function fetchSlides() {
+    async function fetchData() {
       try {
-        const response = await getSlides();
-        if ('error' in response) {
-          console.error(response.error);
-          return;
+        const [slidesResponse, contentResponse] = await Promise.all([
+          getSlides(),
+          getTextContent('landing-page')
+        ])
+
+        if ('error' in slidesResponse) {
+          console.error(slidesResponse.error)
+          return
         }
-        setTopSlides(response.topSlides);
-        setBottomSlides(response.bottomSlides);
+
+        if ('error' in contentResponse) {
+          console.error(contentResponse.error)
+          return
+        }
+
+        setTopSlides(slidesResponse.topSlides)
+        setBottomSlides(slidesResponse.bottomSlides)
+        setBlockContent(contentResponse.content)
       } catch (error) {
-        console.error('Error fetching slides:', error);
+        console.error('Error fetching data:', error)
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
     }
 
-    fetchSlides();
-  }, []);
+    fetchData()
+  }, [])
 
-	if (isLoading) {
-		return <LoadingSpinner />;
-	}
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <DeviceLayout>
@@ -92,6 +110,7 @@ export default function LandingPage() {
         <section>
           <SliderComponent topSlides={topSlides} bottomSlides={bottomSlides} />
           <SectionTwo />
+          <BlockRenderer content={blockContent} />
           <h2 className={styles.title}>
             Some things <br />about
           </h2>
