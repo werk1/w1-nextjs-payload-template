@@ -1,34 +1,33 @@
 import type { CollectionConfig } from 'payload'
 
 export const Media: CollectionConfig = {
-  slug: 'media',
+  slug: 'media', // URL-friendly identifier for the collection
   access: {
-    read: () => true,
+    read: () => true, // Makes media publicly readable
   },
   upload: {
-    staticDir: 'public/media',
-    adminThumbnail: 'thumbnail',
-    mimeTypes: ['image/*'],
+    staticDir: 'public/media', // Where files are stored physically
+    adminThumbnail: 'thumbnail', // Which size to show in admin panel
+    mimeTypes: ['image/*'], // Only allows image files
     imageSizes: [
       {
-        name: 'thumbnail',
+        name: 'thumbnail', // Creates 400px wide thumbnails
         width: 400,
-        height: undefined,
+        height: undefined, // Maintains aspect ratio
         position: 'centre',
       },
       {
-        name: 'slider',
+        name: 'slider', // Creates 1920px wide versions for sliders
         width: 1920,
-        height: undefined,
+        height: undefined, // Maintains aspect ratio
         position: 'centre',
       },
     ],
   },
   fields: [
     {
-      name: 'usecase',
+      name: 'usecase', // Dropdown to categorize images
       type: 'select',
-      required: true,
       options: [
         { label: 'Top Slider', value: 'slider-top' },
         { label: 'Bottom Slider', value: 'slider-bottom' },
@@ -36,18 +35,9 @@ export const Media: CollectionConfig = {
       ],
       defaultValue: 'general',
     },
-    {
-      name: 'alt',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'title',
-      type: 'text',
-    },
-    {
-      name: 'description',
-      type: 'textarea',
-    },
+    // Additional metadata fields
+    { name: 'alt', type: 'text', required: true }, // Accessibility text
+    { name: 'title', type: 'text' }, // Optional title
+    { name: 'description', type: 'textarea' }, // Optional description
   ],
 }

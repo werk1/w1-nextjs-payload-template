@@ -1,0 +1,46 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Title styles */
+.h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--col_text);
+}
+
+.h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--col_text);
+}
+
+.h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--col_text);
+}
+
+/* TextBody variants */
+.standard {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--col_text);
+}
+
+.highlight {
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: var(--col_highlight_bg);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  color: var(--col_text);
+}
+
+.small {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--col_text_muted);
+}
